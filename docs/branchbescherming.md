@@ -25,10 +25,16 @@ blijven onderdeel van [#4](https://github.com/hanze-hbo-ict/codeklad/issues/4).
 
 ## Instellingen voor main
 
+Op 2026-10-21 is de onderstaande basisbescherming ingesteld en via de API
+teruggelezen. `Tooling checks` is gekoppeld aan de GitHub Actions-app (15368).
+Voorlopig zijn nul goedkeuringen vereist en geldt een uitzondering voor
+beheerders. De product owner kan na bevestiging van een tweede reviewer één
+goedkeuring en handhaving voor beheerders laten inschakelen.
+
 Vereis een PR, opgeloste reviewgesprekken en de succesvolle job `Tooling checks`
 op een branch die actueel is ten opzichte van `main`. Sta force-pushes en
-verwijderen van `main` niet toe. Bind de verplichte check aan GitHub Actions
-zodra de eerste run is geregistreerd.
+verwijderen van `main` niet toe. De eerste succesvolle PR-run heeft deze check
+al bij GitHub Actions geregistreerd.
 
 Een verplichte goedkeuring door een tweede account en het toepassen van regels
 op beheerders vereisen een keuze van de product owner. De agent gebruikt nu
