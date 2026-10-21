@@ -74,6 +74,7 @@ projectprincipes en procesafspraken.
 ## Huidige status
 
 CLI 1.2.2, Codex-skills, templates en Bash-scripts zijn lokaal beschikbaar.
-GitHub-toegang is op 2026-10-21 gecontroleerd. De upstreamrepository was leeg;
-de bootstrap wordt via een PR aangeboden. Branchbescherming, CI en hosting
-moeten nog worden ingericht.
+De bootstrap is via PR #5 gemerged. De workflow `Tooling` controleert de
+ontwikkelomgeving en meegeleverde Spec Kit-bestanden. Zie
+[branchbescherming en controles](branchbescherming.md) voor de inrichting en
+beperkingen van de mergegate. Hosting, preview en publicatie staan nog open.
