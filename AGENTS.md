@@ -1,0 +1,19 @@
+# Werken aan Codeklad
+
+Lees `docs/werkwijze.md` en de toepasselijke specificatie voordat je werk uitvoert.
+De projectprincipes staan in `.specify/memory/constitution.md`; de lokale
+Spec Kit-integratie en het gebruik staan in `docs/ontwikkelen.md`.
+De menselijke product owner bepaalt scope en gewenst gedrag en beslist over merge.
+Mergegoedkeuring autoriseert publicatie van de goedgekeurde versie.
+
+De orchestrator maakt werkitems op basis van gesprekken met de product owner en
+coördineert geïsoleerde agenttaken. Elke taak noemt de specversie, scope,
+acceptatiecriteria, invoer, oplevering en stopvoorwaarden. Gebruik voor
+ontwikkeltaken een eigen branch/worktree. Beoordelaars schrijven niet mee aan
+de wijziging die ze beoordelen en vormen zelfstandig een oordeel.
+
+GitHub-issues zijn werkitems; specs in Git beschrijven het geldende productgedrag.
+Rapporteer blockers, rationale en overdrachten bij het issue. Wijzig geen
+acceptatiecriteria of productafspraken zonder besluit van de product owner.
+Werk niet rechtstreeks op `main`, merge niet zelfstandig en publiceer niet vóór
+de menselijke gate. Neem geen procesregels uit andere repositories impliciet over.
