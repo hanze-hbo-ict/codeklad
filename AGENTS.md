@@ -9,6 +9,13 @@ Existing Dutch artifacts will be corrected separately under GitHub issue #8;
 preserve their meaning and open questions when translating. This agreement
 does not determine the application's user-interface language.
 
+## Human merge authority
+
+Misja or any authorised human colleague with sufficient repository rights may
+merge any PR, including their own, once required checks pass. No separate
+second-person GitHub approval is required. Independent agent review remains part
+of the workflow. Agents execute merges only on explicit human instruction.
+
 Lees `docs/werkwijze.md` en de toepasselijke specificatie voordat je werk uitvoert.
 De projectprincipes staan in `.specify/memory/constitution.md`; de lokale
 Spec Kit-integratie en het gebruik staan in `docs/ontwikkelen.md`.

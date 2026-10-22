@@ -23,25 +23,26 @@ implementation. Hosting and publication remain in issue #4.
 
 ## Main protection
 
-On 2026-10-22 the product owner confirmed a colleague can approve PRs.
-The following settings were applied and independently read back through the API:
+On 2026-10-22 the product owner clarified that any authorised human collaborator
+may merge any PR, including their own. A separate GitHub approval from a second
+account is not required. The settings were updated and read back through the API:
 
-- Require a PR and one approving review from another account.
-- Dismiss stale approvals when new commits are pushed.
-- Require approval of the most recent push by someone other than its pusher.
-- Apply the rules to administrators as well (`enforce_admins=true`).
+- Require a PR, with zero required approving reviews.
+- Do not require approval of the latest push or dismiss stale approvals.
+- Apply the remaining rules to administrators as well (`enforce_admins=true`).
 - Require `Tooling checks`, bound to GitHub Actions app 15368, on a branch
   that is up to date with `main`.
 - Require resolved review conversations; disallow force-pushes and deletion.
 
-The agent currently uses the `misja` account. GitHub does not permit an author
-to approve their own PR, so a colleague with appropriate repository access must
-approve the final version. Account permissions were not changed; the colleague's
-identity and access have not yet been verified.
+Misja or another colleague with sufficient repository permissions may merge any
+PR once these checks pass, regardless of its author. Repository permissions were
+not changed. Optional GitHub reviews and independent agent reviews remain useful,
+but a second human approval is not a prerequisite for merge.
 
-Branch protection cannot identify whether a human or agent is using an account.
-The independent GitHub review supplements the explicit human merge decision in
-`docs/werkwijze.md`; it does not authorize the agent to merge autonomously.
+The human merge decision remains required by `docs/werkwijze.md`. An agent may
+execute a merge when explicitly instructed by an authorised human; it must not
+merge autonomously. GitHub cannot distinguish a human from an agent using the
+same account, so this part of the gate remains a process agreement.
 
 Sources: [GitHub branch protection API](https://docs.github.com/en/rest/branches/branch-protection)
 and [uv in GitHub Actions](https://docs.astral.sh/uv/guides/integration/github/).

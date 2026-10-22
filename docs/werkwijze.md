@@ -14,6 +14,15 @@ requirements, acceptance criteria and unresolved questions when translating.
 Historical comments and closed work items may remain in their original language.
 The application's user-interface language is a separate product decision.
 
+## Human merge decision
+
+Misja or any other authorised human colleague with sufficient repository rights
+may merge any PR, including one created under their own account. Required checks
+and other branch protection rules must pass; a separate GitHub approval by a
+second person is not required. Independent agent review remains part of the
+workflow. An agent may execute a merge on explicit human instruction, and must
+not merge autonomously. This clarification was confirmed on 2026-10-22 (#2).
+
 ## Verantwoordelijkheden
 
 De product owner is een mens: Misja of een collega. De orchestrator helpt wensen
