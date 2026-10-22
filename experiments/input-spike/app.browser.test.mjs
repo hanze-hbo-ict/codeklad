@@ -37,7 +37,7 @@ try {
     assert.equal(await page.locator('#theme').getAttribute('data-theme-choice'), mode);
   }
   async function edit(text) {
-    await editor.click(); await page.keyboard.press('ControlOrMeta+a');
+    await page.locator('#editor').click({ position: { x: 80, y: 25 } }); await page.keyboard.press('ControlOrMeta+a');
     if (text) await page.keyboard.insertText(text); else await page.keyboard.press('Backspace');
     assert.equal(await source(), text);
   }
@@ -184,7 +184,7 @@ try {
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
     await answer('long prompt'); await state('ready');
     const longCode = '# a longer source line\n'.repeat(250) + 'print(1)';
-    await editor.click(); await page.keyboard.press('ControlOrMeta+a'); await page.keyboard.insertText(longCode);
+    await page.locator('#editor').click({ position: { x: 80, y: 25 } }); await page.keyboard.press('ControlOrMeta+a'); await page.keyboard.insertText(longCode);
     await page.keyboard.press('ControlOrMeta+a'); await page.keyboard.press('ControlOrMeta+c');
     assert.equal(await page.evaluate(() => navigator.clipboard.readText()), longCode);
     assert.equal(await page.locator('.cm-scroller').evaluate((node) => node.scrollHeight > node.clientHeight), true);
