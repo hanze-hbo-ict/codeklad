@@ -17,6 +17,14 @@ const input = createInput($('input-form'), $('answer'), (identity, line) => {
 });
 const execution = createExecutionControl(({ label, disabled }) => {
   $('run').textContent = label;
+  const symbol = { 'Run code': '▶', Stop: '■' }[label];
+  if (symbol) {
+    const icon = document.createElement('span');
+    icon.setAttribute('aria-hidden', 'true');
+    icon.textContent = symbol;
+    $('run').prepend(icon, ' ');
+  }
+  $('run').dataset.action = disabled ? 'busy' : ({ 'Run code': 'run', Stop: 'stop', Retry: 'retry' }[label] ?? 'busy');
   $('run').disabled = disabled;
 }, {
   run() { output.clear(); runtime.run(editor.source()); },

@@ -128,3 +128,13 @@ subsequent running/input states. Stop clicks call termination immediately; there
 is no execution time limit. Preserve source, focus, input identity and output ACK.
 Use disabled Loading…/Stopping… labels as applicable and an enabled Retry when
 initialisation/worker availability fails. A Python program error is not Retry.
+
+Show a decorative play triangle (▶) beside Run code and a stop square (■) beside
+Stop, as requested in the #27 visual refinement. Keep the action text and button
+width; hide symbols from assistive technology so accessible names remain Run code
+and Stop. Other labels and the 300 ms presentation timing are unchanged.
+
+Use theme-specific green for enabled Run code and red for enabled Stop, with
+readable text/icons and hover colours. Loading/Stopping and the brief disabled
+run state are neutral; Retry retains the blue accent. Text and icons remain
+meaningful without colour. Preserve visible keyboard focus and fixed width.
