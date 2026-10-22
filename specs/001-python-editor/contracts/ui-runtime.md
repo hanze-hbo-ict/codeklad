@@ -4,7 +4,7 @@
 
 One editor labelled main.py, Run and Stop, output/error region, a labelled
 line-input control within the console at its prompt when Python requests input,
-and accessible system/light/dark icon controls. Run/Stop are in the upper editor header.
+and one accessible icon button cycling System → Light → Dark → System. Run/Stop are in the upper editor header.
 No completion UI, AI, package-install controls, file manager or graphics panel.
 Allow normal select/copy shortcuts without rewriting selected code. Do not save or
 restore source through application-managed storage; reload starts initial content.
@@ -99,4 +99,14 @@ to its bottom. Past output is never editable or rendered as HTML. The actual DOM
 may change; input/output/mailbox wire semantics above remain unchanged. Preserve
 lossless finite output and responsive Stop under flood/backpressure. Focus outlines
 are padded/rounded and visible in both themes without clipping at editor gutters.
-Theme controls expose accessible names, selected state and keyboard interaction.
+The theme button shows only its current mode icon and exposes current mode/next
+action through its accessible name/title. Enter/Space advances the cycle.
+
+## Local-preview presentation refinements (#26)
+
+Pending input blends into the console transcript: same font, native caret,
+transparent background and no border/underline/box or Enter/Send button. Enter
+submits through the native line-input form. Preserve accessible naming/help and
+console-level focus indication, accepted-only echo and request identity checks.
+The payoff sits below the editor/workspace rather than above the console.
+Run/Stop remains unchanged pending a separate product-owner decision.

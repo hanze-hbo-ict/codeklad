@@ -112,3 +112,10 @@ their shared files concurrently. T028 follows the revised agreed behaviour and
 distinguishes pending changes from live deployment. T029 follows relevant checks.
 
 Feedback-round local implementation/review evidence: [feedback-round1.md](evidence/feedback-round1.md). T029 completion prepares the human gate; it does not record a merge or school acceptance.
+
+## Phase 9: Local-preview refinements (#26)
+
+- [ ] T030 Review the refinement specification before changing the app. Record the Run/Stop decision separately; do not implement an unconfirmed proposal.
+- [ ] T031 Replace the theme group with one accessible cycling current-mode icon button; move the payoff below the editor/workspace.
+- [ ] T032 Remove visible input decoration and send button; preserve native Enter/caret, accessible naming, console focus, exact echo and existing runtime/input safety.
+- [ ] T033 Run relevant browser/visual regressions, obtain independent review, update PR #25 and the local preview; retain the human merge gate.

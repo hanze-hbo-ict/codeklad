@@ -83,3 +83,12 @@ The README introduces the public general editor and live URL. CONTRIBUTING guide
 humans and agents through the existing issue/specification, isolated development,
 checks, independent review and human merge/publication workflow. This does not
 change governance or replace the separate actual-school acceptance track.
+
+## Local-preview refinements (#26)
+
+Use one accessible theme button cycling system/light/dark, with only its current
+icon visible. Return “One file. One idea at a time.” below the editor/workspace.
+Pending console input uses the transcript font and native caret, without field
+decoration or a separate send button; Enter submits. Keep the input accessible
+and the surrounding console focus visible. The Run/Stop interaction is under
+product-owner discussion; retain existing behaviour until a decision is recorded.

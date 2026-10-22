@@ -126,7 +126,10 @@ Agreed error handling:
   and previous transcript is read-only. Pre-supplied input alone is insufficient.
   Focus/reveal pending input within the console without scrolling to the bottom
   of the whole page, including short/narrow screens; retain transcript selection/copy.
-  This is stdin for a running script, not a standalone command REPL.
+  Input visually blends into the transcript with its native caret: no field box,
+  border, underline or separate Enter/Send button. Submit with Enter; retain a
+  labelled native input and visible console-level focus. This is stdin for a
+  running script, not a standalone command REPL.
 - **FR-004**: Provide a responsive editor and input/output interface.
 - **FR-005**: Follow system theme and allow manual light/dark selection.
 - **FR-006**: Provide no AI assistance.
@@ -147,13 +150,16 @@ Agreed error handling:
   and keyboard order. Retain responsive reachability at short/narrow sizes.
 - **FR-014**: Give editor and console clear, rounded, padded keyboard focus in both
   themes, without clipping at the gutter or obscuring text/selection.
-- **FR-015**: Use keyboard-operable local system/light/dark icons with accessible
-  names, selected-state indication and visible focus, not an external icon CDN.
-  Switching theme preserves source, execution and transcript.
+- **FR-015**: Use one keyboard-operable theme button cycling System → Light →
+  Dark → System. Show only the current mode's local icon. Its accessible name/title
+  convey current mode and next action; retain visible focus. System follows live OS
+  changes and manual choices override them. No external icon CDN. Switching theme
+  preserves source, execution and transcript.
 - **FR-016**: Present a general online Python editor. Remove ans-specific transfer
   instructions, “Runs in your browser” and the hardcoded Python version. Retain
   “No code completion or AI assistance” and both approved taglines; add a subtle
-  labelled repository link to https://github.com/hanze-hbo-ict/klode.
+  labelled repository link to https://github.com/hanze-hbo-ict/klode. Keep “One file.
+  One idea at a time.” below the editor/workspace as a payoff, not above the console.
 - **FR-017**: Provide a public README leading with the live URL and actual features,
   short local quickstart and limits. CONTRIBUTING links the established human/agent
   workflow and governance; do not claim unimplemented feedback is already live.
@@ -246,6 +252,14 @@ line using normal `input()` semantics, without displayed prompt or duplicated ne
 
 Verify upper controls, focus, long code/output and pending input at 1280×720 and
 360×640 in light/dark/system modes, without page horizontal overflow or loss of
-copy/selection. Theme icons expose names and selected state without relying solely
-on colour/shape. Public docs distinguish implemented/live behaviour from planned
+copy/selection. The single theme button exposes current mode and next action without relying
+solely on colour/shape. Public docs distinguish implemented/live behaviour from planned
 changes. No packages, files, extra language or standalone REPL is added.
+
+## Local-preview refinements — 2026-10-22 (#26)
+
+The product owner requests one cycling theme icon, the payoff below the editor
+and console input presented as text/caret without field decoration or a send
+button. These refinements supersede the three-button/prompt-field presentation
+in the initial feedback implementation. Run/Stop interaction remains a separate
+open product choice; do not change it until the product owner confirms an option.

@@ -113,3 +113,12 @@ and a simplified footer. Update public README/CONTRIBUTING from agreed behaviour
 Validate new source initialization, exact input transcript/order, rejection and
 stale events, Stop/flood/rerun, transcript selection and focus at 1280×720/360×640.
 Retain existing same-origin, no-completion/AI and school acceptance boundaries.
+
+## Local-preview refinements (#26)
+
+Keep existing native input/form semantics and make only its presentation
+terminal-like: transparent undecorated input, native caret and Enter submission
+without a separate send button. Retain console focus indication and labels.
+Replace the theme group with one current-mode icon button cycling system, light,
+dark. Move the payoff below the workspace. Await the Run/Stop product decision;
+no runtime/mailbox/ACK protocol change is needed for these UI refinements.
