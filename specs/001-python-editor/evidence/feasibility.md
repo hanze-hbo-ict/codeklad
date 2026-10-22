@@ -2,7 +2,7 @@
 
 Baseline: approved specification commit `9112431`, constitution 1.0.1;
 implementation base `3e53c7d`, branch `013-input-feasibility`.
-Implementation commit: pending independent review and final commit.
+Implementation commit: see the reviewed head SHA recorded in the PR and issue #13 handoff.
 This report covers local T001–T004 preparation. T005–T006 remain blocked on
 actual-environment evidence; no full editor work or publication is authorised.
 
