@@ -53,8 +53,11 @@ The orchestrator owns this report and task-status update after that review.
 
 ## Remaining gates
 
-Human merge approval is still required. No feedback version has been deployed
-by this work. After merge, verify the released Netlify commit and live headers,
+Human merge approval is still required for production. The existing Netlify
+integration automatically built a PR preview after PR #25 was opened:
+https://deploy-preview-25--klode.netlify.app/ (initial preview deployment
+`6ada6f475e5929add6402f4d`). No production release was requested.
+After merge, verify the released Netlify commit and live headers,
 runtime loading and core editor/input/Stop behaviour using `docs/hosting.md`.
 
 Actual restricted school Windows/Edge browser/version, opening route, cold-load
