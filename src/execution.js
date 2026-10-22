@@ -1,6 +1,6 @@
 // This delays only the Stop presentation; termination itself is immediate.
 export const STOP_REVEAL_MS = 300;
-export function createExecutionControl(render, actions, timers = { set: setTimeout, clear: clearTimeout }) {
+export function createExecutionControl(render, actions, timers = { set: (callback, delay) => setTimeout(callback, delay), clear: (id) => clearTimeout(id) }) {
   let state, action = null, timer = null, version = 0, stopVisible = false;
   function cancelReveal() {
     version += 1;
