@@ -1,7 +1,7 @@
 # Ontwikkelomgeving
 
 Gebruik Python 3.11 of nieuwer en `uv`. `pyproject.toml` beheert de
-ontwikkeltooling; Codeklad heeft voorlopig geen Python-applicatiepakket.
+ontwikkeltooling; Klode heeft voorlopig geen Python-applicatiepakket.
 De geplande editor draait als JavaScript/Pyodide-applicatie in de browser.
 
 Spec Kit staat vast op `specify-cli==1.2.2`. Het lockbestand legt de
@@ -33,13 +33,13 @@ uv run --locked specify init /tmp/codeklad-speckit-stage \
   --integration codex --script sh --non-interactive
 ```
 
-De mappen `.specify` en `.agents` zijn daarna overgenomen naar Codeklad,
+De mappen `.specify` en `.agents` zijn daarna overgenomen naar Klode,
 zonder bestaande projectbestanden te overschrijven. Het constitution-template
 is ingevuld met de eerder bevestigde projectafspraken. Init-metadata en
 manifests bewaren de herkomst van gegenereerde bestanden. De stagingdirectory
 was alleen voor de bootstrap; gebruik voor volgende generatie een lege directory.
 
-Start Codex vanuit Codeklad om de projectskills in `.agents/skills` te
+Start Codex vanuit Klode om de projectskills in `.agents/skills` te
 ontdekken. Relevante opdrachten in het agentgesprek zijn:
 
 - `$speckit-constitution`: projectprincipes onderhouden.
