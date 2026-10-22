@@ -14,7 +14,8 @@ is insufficient evidence. No automatic deployment is part of these commands.
 ## Feasibility evidence
 
 Record in evidence/feasibility.md: commit, runtime/browser versions, opening route,
-approved URL, response headers, crossOriginIsolated in window/worker, cold-load
+approved URL, agreed reference exercise with expected results, response headers,
+crossOriginIsolated in window/worker, cold-load
 network log and asset sizes. Test a normal browser first, then the actual exam
 Windows laptop with every unapproved destination blocked. The product owner or
 school supplies the actual laptop and confirms whitelist/opening details.

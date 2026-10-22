@@ -16,7 +16,7 @@ human scope/merge approval. GitHub issues remain authoritative for work status.
 No full user-story implementation begins until this evidence gate passes.
 
 - [ ] T004 Build an isolated minimal stdin/shared-memory spike in experiments/input-spike/ using a module worker and page input field; prove repeated, empty and Unicode answers with visible prompts, Stop/restart and no main-thread blocking.
-- [ ] T005 Record actual browser/version, opening route, whitelist, candidate HTTPS host/header capability and cold-cache origin audit in specs/001-python-editor/evidence/feasibility.md; coordinate approved candidate provisioning with #4 and run the spike on the exam laptop.
+- [ ] T005 Record actual browser/version, opening route, whitelist, agreed reference exercise with expected results, candidate HTTPS host/header capability and cold-cache origin audit in specs/001-python-editor/evidence/feasibility.md; coordinate approved candidate provisioning with #4 and run the spike on the exam laptop.
 - [ ] T006 Obtain independent review of specs/001-python-editor/evidence/feasibility.md against the input/whitelist gate; stop and report missing/failed actual-environment evidence at #3 before proceeding.
 
 ## Phase 3: US1 — Write and run Python (P1)
