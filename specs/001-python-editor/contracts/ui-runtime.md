@@ -110,3 +110,5 @@ submits through the native line-input form. Preserve accessible naming/help and
 console-level focus indication, accepted-only echo and request identity checks.
 The payoff sits below the editor/workspace rather than above the console.
 Run/Stop remains unchanged pending a separate product-owner decision.
+
+The console starts empty: omit the instructional “Run your code to see the result here.” placeholder. Only actual program output, input and errors appear in its transcript. Product-owner refinement under #26.

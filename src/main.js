@@ -7,7 +7,7 @@ import { createRuntime } from './runtime/client.js';
 const $ = (id) => document.getElementById(id);
 createTheme($('theme'));
 const editor = createEditor($('editor'), '# Write your Python code here\nprint("Hello, world!")\n', () => {});
-const output = createOutput($('output'), $('error'), $('output-placeholder'));
+const output = createOutput($('output'), $('error'));
 const labels = { loading: 'Loading Python…', ready: 'Ready', running: 'Running', 'waiting-for-input': 'Waiting for input', stopping: 'Stopping…', failed: 'Unavailable' };
 const input = createInput($('input-form'), $('answer'), (identity, line) => {
   const result = runtime.answer(identity, line);
