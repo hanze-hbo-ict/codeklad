@@ -1,5 +1,14 @@
 # Werken aan Codeklad
 
+## Working language
+
+Use English for agent instructions, task handoffs, project documentation,
+specifications, plans, tasks, GitHub issues, PRs, reviews and work reports.
+Direct conversation with the human product owner remains Dutch.
+Existing Dutch artifacts will be corrected separately under GitHub issue #8;
+preserve their meaning and open questions when translating. This agreement
+does not determine the application's user-interface language.
+
 Lees `docs/werkwijze.md` en de toepasselijke specificatie voordat je werk uitvoert.
 De projectprincipes staan in `.specify/memory/constitution.md`; de lokale
 Spec Kit-integratie en het gebruik staan in `docs/ontwikkelen.md`.
