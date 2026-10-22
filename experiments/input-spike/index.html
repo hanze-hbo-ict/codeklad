@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Klode input feasibility spike</title>
+<style>
+body{font:16px system-ui;max-width:60rem;margin:2rem auto;padding:0 1rem}textarea{width:100%;box-sizing:border-box;font:15px monospace}button,input,select{font:inherit;margin:.3rem}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#eee;padding:1rem;min-height:5rem}#error{color:#a00}input{max-width:100%;box-sizing:border-box}label{display:block}
+</style>
+<h1>Klode input feasibility spike</h1>
+<p>Technical experiment only. No exam compatibility or complete editor is claimed.</p>
+<label>Example <select id="example"><option value="input">Two prompts</option><option value="loop">Endless loop</option><option value="modules">Standard/unavailable modules</option></select></label>
+<label for="source">main.py</label><textarea id="source" rows="9" spellcheck="false"></textarea>
+<div><button id="run" disabled>Run</button><button id="stop" disabled>Stop / reset runtime</button></div>
+<p id="status" role="status">Loading runtime…</p><p id="error" role="alert"></p>
+<pre id="output" aria-label="Program output"></pre>
+<form id="input-form" hidden><label for="answer">Program input (maximum 65,536 UTF-8 bytes)</label><input id="answer" type="text" autocomplete="off"><button id="submit">Submit line</button></form>
+<script type="module" src="./main.js"></script>
+</html>

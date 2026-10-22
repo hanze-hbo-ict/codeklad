@@ -7,15 +7,15 @@ human scope/merge approval. GitHub issues remain authoritative for work status.
 
 ## Phase 1: Setup
 
-- [ ] T001 Pin supported Node, Vite, CodeMirror and Pyodide versions in package.json, package-lock.json and .node-version; record compatibility in specs/001-python-editor/evidence/feasibility.md.
-- [ ] T002 Add reproducible runtime vendoring with checksums/license notices in scripts/vendor-runtime.mjs and public/runtime/<pinned-version>/; wire it into package.json and prevent CDN/import-triggered package downloads.
-- [ ] T003 Configure Vite dev/preview headers and static build in vite.config.js; document the same HTTPS/COOP/COEP production requirements in docs/hosting.md without choosing or publishing a host.
+- [X] T001 Pin supported Node, Vite, CodeMirror and Pyodide versions in package.json, package-lock.json and .node-version; record compatibility in specs/001-python-editor/evidence/feasibility.md.
+- [X] T002 Add reproducible runtime vendoring with checksums/license notices in scripts/vendor-runtime.mjs and public/runtime/<pinned-version>/; wire it into package.json and prevent CDN/import-triggered package downloads.
+- [X] T003 Configure Vite dev/preview headers and static build in vite.config.js; document the same HTTPS/COOP/COEP production requirements in docs/hosting.md without choosing or publishing a host.
 
 ## Phase 2: Foundation and feasibility gate
 
 No full user-story implementation begins until this evidence gate passes.
 
-- [ ] T004 Build an isolated minimal stdin/shared-memory spike in experiments/input-spike/ using a module worker and page input field; prove repeated, empty and Unicode answers with visible prompts, Stop/restart and no main-thread blocking.
+- [X] T004 Build an isolated minimal stdin/shared-memory spike in experiments/input-spike/ using a module worker and page input field; prove repeated, empty and Unicode answers with visible prompts, Stop/restart and no main-thread blocking.
 - [ ] T005 Record actual browser/version, opening route, whitelist, agreed reference exercise with expected results, candidate HTTPS host/header capability and cold-cache origin audit in specs/001-python-editor/evidence/feasibility.md; coordinate approved candidate provisioning with #4 and run the spike on the exam laptop.
 - [ ] T006 Obtain independent review of specs/001-python-editor/evidence/feasibility.md against the input/whitelist gate; stop and report missing/failed actual-environment evidence at #3 before proceeding.
 
