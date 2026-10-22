@@ -1,5 +1,5 @@
 [project]
-name = "codeklad"
+name = "klode"
 version = "0.1.0"
 description = "Minimale online programmeeromgeving voor onderwijs en toetsen"
 readme = "README.md"

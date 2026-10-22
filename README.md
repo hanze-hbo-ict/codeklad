@@ -1,4 +1,7 @@
-# Codeklad
+# Klode
+
+Formerly Codeklad. The repository URL and local checkout path retain the old
+name during the rename review; see [issue #10](https://github.com/hanze-hbo-ict/codeklad/issues/10).
 
 Een minimale online programmeeromgeving voor onderwijs en toetsen.
 De eerste versie ondersteunt Python in één bestand: `main.py`.
@@ -15,6 +18,6 @@ Er is nog geen applicatie of deployment ingericht.
 
 ## Licentie
 
-Codeklad is beschikbaar onder de [MIT-licentie](LICENSE).
+Klode is beschikbaar onder de [MIT-licentie](LICENSE).
 Voor meegeleverde Spec Kit-bestanden geldt daarnaast de oorspronkelijke
 [copyright- en licentievermelding](THIRD_PARTY_NOTICES.md).
