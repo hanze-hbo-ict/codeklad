@@ -32,8 +32,8 @@ assistance and with control over availability and functionality.
 ## Proposed technical direction
 
 Pyodide in a Web Worker, an established editor library and all required assets
-served from an allowed origin. Static hosting remains a proposal; Netlify was
-mentioned but not selected. Feasibility must be demonstrated on an actual exam
+served from an allowed origin. The product owner selected Netlify on 2026-10-22;
+the intended URL is klode.netlify.app, pending account/domain and live verification. Feasibility must be demonstrated on an actual exam
 laptop with the whitelist in effect, including a cold load without cached assets.
 A URL whitelist is restricted connectivity, not a requirement for fully offline use.
 
@@ -51,9 +51,8 @@ The product owner confirmed the exam constraints, interactive input, copy/paste
 transfer, lack of a cross-session persistence requirement, and the name Klode on
 2026-10-22. The product owner subsequently accepted standard-library-only scope
 without extra packages/files/graphics, syntax highlighting and indentation without
-completion, and same-session reload recovery. These decisions are recorded under issue #3. The physical repository
-and local directory still use `codeklad` while the rename is prepared separately;
-existing URLs and identifiers remain valid during review.
+completion, and same-session reload recovery. These decisions are recorded under issue #3. The repository is now `hanze-hbo-ict/klode`; the local checkout path may still
+contain `codeklad`. Existing GitHub links redirect after the rename.
 
 The product owner subsequently reported the local libvirt Windows/Edge HTTPS
 spike works and authorised editor implementation to continue. This permits local
