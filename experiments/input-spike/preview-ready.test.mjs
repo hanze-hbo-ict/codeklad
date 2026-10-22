@@ -31,8 +31,21 @@ test('early child exit and spawn errors fail with captured diagnostics', async (
 test('non-successful HTTP responses time out with status and logs', async () => {
   await server(503, async (url) => {
     const process = child();
-    const ready = waitForPreview(process, url, { timeoutMs: 100 });
+    const ready = waitForPreview(process, url, { timeoutMs: 1000 });
     process.stderr.write('not ready yet');
-    await assert.rejects(ready, /timed out after 100ms[\s\S]*HTTP 503[\s\S]*not ready yet/);
+    await assert.rejects(ready, /timed out after 1000ms[\s\S]*HTTP 503[\s\S]*not ready yet/);
   });
+});
+
+test('later request failures retain the last completed HTTP response in timeout diagnostics', async (t) => {
+  let calls = 0;
+  t.mock.method(globalThis, 'fetch', async () => {
+    if (calls++ === 0) return new Response('not ready', { status: 503 });
+    throw new Error('later request failed');
+  });
+  const process = child();
+  const ready = waitForPreview(process, 'http://preview.test/', { timeoutMs: 250 });
+  process.stderr.write('fixture diagnostic');
+  await assert.rejects(ready, /later request failed[\s\S]*HTTP 503[\s\S]*fixture diagnostic/);
+  assert.ok(calls > 1);
 });
