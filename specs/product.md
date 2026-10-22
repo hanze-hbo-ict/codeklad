@@ -1,13 +1,14 @@
 # Product specification — draft
 
-Status: agreed product scope; local first-version implementation under review (#15).
-Actual school-environment acceptance and release remain pending.
+Status: agreed product scope, including feedback round 1 (#19–#24).
+Public deployment: https://klode.netlify.app/. Actual school-environment acceptance remains pending.
 Product name: **Klode**, selected by the product owner on 2026-10-22 (formerly Codeklad).
 
 ## Goal
 
-Provide a minimal online programming editor for education and exams, without AI
-assistance and with control over availability and functionality.
+Provide a minimal general online Python editor without AI assistance or code
+completion. Education and exams are contextual use cases, rather than a required
+workflow or an ans.app integration.
 
 ## Agreed requirements
 
@@ -19,11 +20,14 @@ assistance and with control over availability and functionality.
 - Exam devices are locked Windows laptops. Internet access is restricted by a URL
   whitelist to ans.app and selected editor environments; no additional specialised
   lockdown software was identified by the product owner.
-- Python `input()` must be interactive. An input field in the interface, inspired
-  by wasm.ch, is the proposed interaction; exact implementation is to be validated.
-- Students transfer code by copying from the editor and pasting into ans.app.
-- Preserve current editor code across page reloads within the same session;
-  persistence between sessions is not required.
+- Python `input()` is answered directly within the console beside its prompt.
+  Accepted input is echoed once with a newline before subsequent output; prior
+  transcript is read-only. This is script stdin, not a standalone Python REPL.
+- Native code selection/copy preserves exact source; copying into ans.app is one
+  contextual exam workflow, not generic interface copy.
+- Do not save or restore source across reloads through application-managed browser
+  storage. Reload starts the normal initial document. Current code remains intact
+  through execution, errors, Stop and theme changes.
 - First-version Python scope is the runtime-supported standard library, without
   extra packages, user file workflows or graphics.
 - Provide syntax highlighting and automatic indentation, without code completion.
@@ -33,7 +37,7 @@ assistance and with control over availability and functionality.
 
 Pyodide in a Web Worker, an established editor library and all required assets
 served from an allowed origin. The product owner selected Netlify on 2026-10-22;
-the intended URL is klode.netlify.app, pending account/domain and live verification. Feasibility must be demonstrated on an actual exam
+the public URL is https://klode.netlify.app/. Feasibility must be demonstrated on an actual exam
 laptop with the whitelist in effect, including a cold load without cached assets.
 A URL whitelist is restricted connectivity, not a requirement for fully offline use.
 
@@ -58,3 +62,36 @@ The product owner subsequently reported the local libvirt Windows/Edge HTTPS
 spike works and authorised editor implementation to continue. This permits local
 implementation while preserving actual school-whitelist evidence as an acceptance
 and exam-use release gate; see the dated continuation decision in the feature spec.
+
+## Feedback round 1 — 2026-10-22 (#19–#24)
+
+The product owner approved implementation of the categorised feedback. This
+supersedes the earlier same-session reload-recovery decision above: no substitute
+source persistence or storage-failure messaging is required. Browser-native history
+or BFCache behaviour is not an application recovery promise. Existing evidence
+remains valid for its recorded commit, not proof of this revised behaviour.
+
+Run/Stop belong near the top of the editor. Pending console input must be focused
+and revealed within the console without requiring a trip to the page bottom.
+Editor/console focus must remain clear and padded, rounded with its component,
+and unclipped by the line-number gutter. System/light/dark use accessible local
+icon controls. Keep “No code completion or AI assistance”, “A little room for
+Python.” and “One file. One idea at a time.” Add a subtle repository link; remove
+“Runs in your browser”, the hardcoded Python version and ans-specific instructions.
+
+The README introduces the public general editor and live URL. CONTRIBUTING guides
+humans and agents through the existing issue/specification, isolated development,
+checks, independent review and human merge/publication workflow. This does not
+change governance or replace the separate actual-school acceptance track.
+
+## Local-preview refinements (#26)
+
+Use one accessible theme button cycling system/light/dark, with only its current
+icon visible. Return “One file. One idea at a time.” below the editor/workspace.
+Pending console input uses the transcript font and native caret, without field
+decoration or a separate send button; Enter submits. Keep the input accessible
+and the surrounding console focus visible. The approved #27 interaction is one Run code/Stop/Retry button in the same
+position, with an initial 300 ms Stop appearance delay for short executions and
+immediate Stop on input wait. Actual Stop is immediate; there is no execution
+timeout or idle reset control. Loading/Stopping disable the button; ordinary
+Python errors return to Run code rather than Retry.

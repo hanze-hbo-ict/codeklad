@@ -13,22 +13,24 @@
 
 ## Requirement completeness
 
-- [x] Interactive input, copy/paste to ans.app and no cross-session persistence requirement are recorded.
+- [x] Inline console input, exact native copy and no application source persistence are recorded.
 - [x] The Windows exam laptop and URL whitelist constraints are recorded.
 - [x] Product-scope questions are resolved; actual-environment prerequisites remain explicit.
-- [x] Python scope, editor assistance and same-session recovery are bounded.
+- [x] Python scope, editor assistance and removal of reload recovery are bounded.
 - [ ] Browser/version, opening route, whitelist and reference exercise are confirmed.
 - [x] Proposed outcomes are measurable and user-focused.
 - [x] Edge cases, dependencies and scope boundaries are explicit.
 
 ## Readiness
 
-- [ ] The product owner has confirmed the concrete acceptance proposals.
+- [x] The product owner confirmed the feature scope and feedback #19–#24.
 - [ ] Actual exam-laptop scenarios await browser/URL/reference-exercise details.
 - [x] The specification can support a plan with an explicit feasibility gate.
 
 ## Notes
 
 This is a specification self-check, not independent acceptance evidence.
-Both cross-session persistence scope and same-session reload recovery are decided.
-No extension hooks are configured. Implementation and publication remain outside scope.
+Feedback round 1 supersedes earlier recovery decisions. Revised requirements cover
+console echo, upper controls, accessible focus/theme icons and public documentation.
+No extension hooks are configured. This self-check does not prove implementation
+or authorise publication; independent review and the human gate remain required.

@@ -2,11 +2,14 @@
 
 ## User interaction
 
-One editor labelled main.py, Run and Stop, output/error region, a labelled
-line-input control when Python requests input, and system/light/dark themes.
+One editor labelled main.py, one state-dependent Run code/Stop/Retry action,
+output/error region, a labelled
+line-input control within the console at its prompt when Python requests input,
+and one accessible icon button cycling System → Light → Dark → System. The execution button is in the upper editor header.
 No completion UI, AI, package-install controls, file manager or graphics panel.
-Allow normal select/copy shortcuts without rewriting selected code. Preserve code
-on reload in the same session; warn if browser storage prevents that guarantee.
+Allow normal select/copy shortcuts without rewriting selected code. Do not save or
+restore source through application-managed storage; reload starts initial content.
+Keep current edits independent of execution/reset/theme; omit recovery warnings.
 
 ## Messages
 
@@ -64,12 +67,16 @@ modules/builtins can persist until Stop. This is not a security sandbox.
 
 Application state is exposed in `#status[data-state]`: loading, ready, running,
 waiting-for-input, stopping, failed. The visible labels are plain English.
-`#run` is enabled only when ready; `#stop` resets the runtime (Retry after failure).
+`#run` is the single execution action. Ready offers Run code; an initial running
+state keeps it disabled for 300 ms, then offers Stop. Input wait offers Stop
+immediately and input resumption retains Stop. Loading/Stopping are disabled,
+failed runtime availability offers Retry. Ordinary Python errors return to ready.
+Stop terminates/reinitialises the worker immediately; no idle reset action remains.
 Editor source lives independently and survives runtime termination.
 
-Session storage key `klode.source.v1` holds source only. A missing key uses the
-initial example; an empty value restores an empty editor. Every document change
-saves synchronously; storage failures warn without disabling editing/execution.
+Feedback #20 supersedes the original source-storage contract: do not read or write
+`klode.source.v1` or an alternative source persistence store. Existing values are
+ignored. Source remains in the current document until navigation/reload.
 Theme selection is in-memory only; System also reacts to live OS preference changes.
 
 Output uses a separate one-word shared acknowledgement buffer. The worker groups
@@ -79,4 +86,55 @@ chunk; the page appends at an animation frame and acknowledges atomically. This
 backpressure keeps Stop reachable during endless printing without discarding or
 capping output. Pending output flushes before input, completion and failure.
 The isolated technical spike omits output acknowledgement; the application enables
-it. Output is a read-only native text control, retaining exact safe plain text.
+it. Feedback #21 supersedes the native-textarea-only presentation: the prior
+transcript remains safe read-only plain text, with an editable labelled active input
+within the console beside its current prompt. Preserve transcript selection/copy.
+
+## Accepted input echo and presentation (#21–#23)
+
+Validate active run/request identity and capacity before recording an answer. A
+successfully accepted line is echoed exactly once with a visual newline before any
+subsequent worker output. Python receives normal line-input content, without the
+prompt or an extra duplicated newline. Empty input still records a line break.
+Oversize, duplicate, cancelled or stale submissions do not enter accepted history.
+Stop invalidates active input; prior-run events cannot reach a new transcript.
+
+Focus/reveal the pending input by scrolling the console, without forcing the page
+to its bottom. Past output is never editable or rendered as HTML. The actual DOM
+may change; input/output/mailbox wire semantics above remain unchanged. Preserve
+lossless finite output and responsive Stop under flood/backpressure. Focus outlines
+are padded/rounded and visible in both themes without clipping at editor gutters.
+The theme button shows only its current mode icon and exposes current mode/next
+action through its accessible name/title. Enter/Space advances the cycle.
+
+## Local-preview presentation refinements (#26)
+
+Pending input blends into the console transcript: same font, native caret,
+transparent background and no border/underline/box or Enter/Send button. Enter
+submits through the native line-input form. Preserve accessible naming/help and
+console-level focus indication, accepted-only echo and request identity checks.
+The payoff sits below the editor/workspace rather than above the console.
+The approved #27 execution interaction below supersedes the earlier adjacent buttons.
+
+The console starts empty: omit the instructional “Run your code to see the result here.” placeholder. Only actual program output, input and errors appear in its transcript. Product-owner refinement under #26.
+
+## Single execution control and reveal timer (#27)
+
+One native button in a stable position/width dispatches the currently offered
+action. Ready→running starts one 300 ms Stop-reveal timer; ready/loading/stopping/
+failed or a new run cancels/invalidates it. Short runs must not receive a late
+Stop label. Waiting-for-input bypasses the delay and keeps Stop enabled on
+subsequent running/input states. Stop clicks call termination immediately; there
+is no execution time limit. Preserve source, focus, input identity and output ACK.
+Use disabled Loading…/Stopping… labels as applicable and an enabled Retry when
+initialisation/worker availability fails. A Python program error is not Retry.
+
+Show a decorative play triangle (▶) beside Run code and a stop square (■) beside
+Stop, as requested in the #27 visual refinement. Keep the action text and button
+width; hide symbols from assistive technology so accessible names remain Run code
+and Stop. Other labels and the 300 ms presentation timing are unchanged.
+
+Use theme-specific green for enabled Run code and red for enabled Stop, with
+readable text/icons and hover colours. Loading/Stopping and the brief disabled
+run state are neutral; Retry retains the blue accent. Text and icons remain
+meaningful without colour. Preserve visible keyboard focus and fixed width.

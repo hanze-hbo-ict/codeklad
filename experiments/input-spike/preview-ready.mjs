@@ -16,19 +16,21 @@ export async function waitForPreview(child, url, { timeoutMs = 15000 } = {}) {
   const shutdown = new AbortController();
   const deadline = Date.now() + timeoutMs;
   const poll = async () => {
-    let lastFailure = 'No response';
+    let lastFailure = 'No response', lastResponse = null;
     while (!shutdown.signal.aborted && Date.now() < deadline) {
       try {
         const response = await fetch(url, { signal: AbortSignal.any([shutdown.signal, AbortSignal.timeout(Math.min(1000, Math.max(1, deadline - Date.now())))]) });
         await response.arrayBuffer();
         if (response.ok) return;
-        lastFailure = `HTTP ${response.status}`;
+        lastResponse = `HTTP ${response.status}`;
+        lastFailure = lastResponse;
       } catch (error) { lastFailure = error.message; }
       if (shutdown.signal.aborted) return;
       try { await delay(Math.min(100, Math.max(1, deadline - Date.now())), undefined, { signal: shutdown.signal }); }
       catch { return; }
     }
-    throw diagnostics(`Preview HTTP readiness timed out after ${timeoutMs}ms at ${url}: ${lastFailure}`);
+    const responseDetail = lastResponse && lastResponse !== lastFailure ? ` (last response: ${lastResponse})` : '';
+    throw diagnostics(`Preview HTTP readiness timed out after ${timeoutMs}ms at ${url}: ${lastFailure}${responseDetail}`);
   };
   try { await Promise.race([poll(), exited]); }
   finally { shutdown.abort(); }

@@ -1,33 +1,47 @@
 import './styles.css';
 import { createEditor } from './editor.js';
-import { createSession } from './session.js';
 import { createTheme } from './theme.js';
 import { createOutput } from './output.js';
 import { createInput } from './input.js';
+import { createExecutionControl } from './execution.js';
 import { createRuntime } from './runtime/client.js';
 const $ = (id) => document.getElementById(id);
 createTheme($('theme'));
-const session = createSession(() => sessionStorage, (message) => { $('storage-warning').textContent = message; $('storage-warning').hidden = false; document.querySelector('.session-note').hidden = true; });
-const editor = createEditor($('editor'), session.restore('# Write your Python code here\nprint("Hello, world!")\n'), (source) => session.save(source));
-const output = createOutput($('output'), $('error'), $('output-placeholder'));
+const editor = createEditor($('editor'), '# Write your Python code here\nprint("Hello, world!")\n', () => {});
+const output = createOutput($('output'), $('error'));
 const labels = { loading: 'Loading Python…', ready: 'Ready', running: 'Running', 'waiting-for-input': 'Waiting for input', stopping: 'Stopping…', failed: 'Unavailable' };
 const input = createInput($('input-form'), $('answer'), (identity, line) => {
-  const result = runtime.answer(identity, line); output.error(result.error ?? ''); return result.ok;
+  const result = runtime.answer(identity, line);
+  if (result.ok) { output.append(line + '\n'); output.flush(); output.reveal(); }
+  output.error(result.error ?? ''); return result.ok;
+});
+const execution = createExecutionControl(({ label, disabled }) => {
+  $('run').textContent = label;
+  const symbol = { 'Run code': '▶', Stop: '■' }[label];
+  if (symbol) {
+    const icon = document.createElement('span');
+    icon.setAttribute('aria-hidden', 'true');
+    icon.textContent = symbol;
+    $('run').prepend(icon, ' ');
+  }
+  $('run').dataset.action = disabled ? 'busy' : ({ 'Run code': 'run', Stop: 'stop', Retry: 'retry' }[label] ?? 'busy');
+  $('run').disabled = disabled;
+}, {
+  run() { output.clear(); runtime.run(editor.source()); },
+  stop() { output.error(''); runtime.stop(); },
+  retry() { output.error(''); runtime.initialise(); },
 });
 const runtime = createRuntime((event) => {
   if (event.type === 'state') {
     output.flush();
     if (event.state === 'ready' || event.state === 'waiting-for-input') output.reveal();
     $('status').textContent = labels[event.state]; $('status').dataset.state = event.state;
-    $('run').disabled = event.state !== 'ready';
-    $('stop').disabled = event.state === 'loading' || event.state === 'stopping';
-    $('stop').textContent = event.state === 'failed' ? 'Retry' : 'Stop';
+    execution.state(event.state);
     if (event.state !== 'waiting-for-input') input.clear();
   }
   if (event.type === 'input') input.request(event.identity);
   if (event.type === 'output') output.append(event.text);
   if (event.type === 'error') output.error(event.text);
 });
-$('run').addEventListener('click', () => { if (!$('run').disabled) { output.clear(); runtime.run(editor.source()); } });
-$('stop').addEventListener('click', () => { output.error(''); runtime.stop(); });
+$('run').addEventListener('click', () => execution.activate());
 runtime.initialise();

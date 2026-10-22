@@ -1,8 +1,9 @@
 # Netlify hosting and verification
 
-The product owner selected Netlify on 2026-10-22, with intended site name
-`klode.netlify.app`. Account connection and domain ownership are not yet verified.
-Configuration is tracked in `netlify.toml` under issue #17 (parent #4).
+The product owner selected Netlify on 2026-10-22 and the public editor is live at
+https://klode.netlify.app/. Configuration is tracked in `netlify.toml` under
+issue #17 (parent #4). Record exact deployment metadata and account settings
+separately; the public URL alone does not establish every operational setting.
 
 ## Connect the repository
 
@@ -13,12 +14,12 @@ secrets or runtime environment variables are required. Do not set `NODE_ENV` to
 `production` during dependency installation: build dependencies must be installed.
 The build verifies/packages the pinned Python runtime before running Vite.
 
-The owner can reserve the Netlify project/name before publishing. Enable production
-builds only for the human-approved main version; disable branch deploys and deploy
+Enable production builds only for the human-approved main version; disable branch
+deploys and deploy
 previews for unapproved branches unless the product owner authorises a preview.
 A merge decision authorises publication of the approved version; failed release
-checks stop further publication. This configuration change does not claim a live
-deployment or create an account/site.
+checks stop further publication. Record the deployed commit and verification
+results for each approved release.
 
 `netlify.toml` applies COOP/COEP to all static responses. Vite dev/preview headers
 alone do not configure Netlify. Netlify provides HTTPS; no local test CA should be
@@ -72,8 +73,12 @@ JavaScript and runtime responses; `.wasm` must use `application/wasm` and `.mjs`
 a JavaScript MIME type. Confirm window and worker are cross-origin isolated.
 
 Use a cold browser context with other network origins blocked. Check two interactive
-prompts, empty/Unicode answers, Stop during input/loop/output flood, rerun, and exact
-same-tab reload recovery. Observe all five runtime requests on the Netlify origin;
+prompts with accepted-answer echo/newlines, empty/Unicode answers, Stop during
+input/loop/output flood, rerun, and exact native source copying. For feedback-round
+releases, verify reload starts the normal initial source without application-managed
+source recovery, including when an old storage value exists. Current source must
+survive Run/errors/Stop/theme changes. Historical recovery checks describe only
+their original commits. Observe all five runtime requests on the Netlify origin;
 there must be no runtime CDN or package-install request. Native copy into ans.app
 and the actual Windows/Edge school whitelist remain separate acceptance evidence
 in #13, not implied by successful Netlify smoke tests.

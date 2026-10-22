@@ -26,7 +26,9 @@ school supplies the actual laptop and confirms whitelist/opening details.
 
 1. Run `print(2 + 3)` and see 5; introduce/fix syntax and runtime errors.
 2. Run two input() calls with visible prompts; answer after execution starts.
-   Include empty and non-ASCII answers and a prompt with no newline.
+   Type directly beside the console prompt. Include empty and non-ASCII answers,
+   repeated prompts and a prompt with no newline. Accepted answers echo once with
+   a newline before later output; rejected/stale answers never echo as accepted.
 3. Stop while waiting for input and while running an endless loop; run again.
    Code survives, stale events/answers do not enter the new execution.
 4. Reject an input line larger than mailbox capacity visibly and without truncation.
@@ -34,10 +36,13 @@ school supplies the actual laptop and confirms whitelist/opening details.
    packages produce an error without attempted network installation.
 6. Copy multiline code containing indentation from the editor into ans.app and
    compare it exactly. Test actual clipboard behaviour on the exam laptop.
-7. Edit and reload in the same tab; recover exact code. Repeat with an empty editor.
-   Simulate unavailable storage and confirm a visible warning with editing intact.
+7. Edit and reload; normal initial content returns. Repeat with empty source and an
+   old `klode.source.v1` value. Confirm no source save/restore or recovery warning;
+   errors, Run/Stop and theme changes retain current edits, including edits during a run.
 8. Verify syntax highlighting/indentation with no completion/AI interface.
-9. Verify system/manual themes and reachable controls at 360 and 1280 CSS pixels.
+9. Verify accessible system/manual icon controls and upper Run/Stop at 360×640 and
+   1280×720. Check padded rounded focus, gutter visibility, long code/output, input
+   reveal within the console, transcript copy and no page horizontal overflow.
 10. Cold-load the production build under whitelist conditions and confirm only
     approved application/runtime resources are requested.
 

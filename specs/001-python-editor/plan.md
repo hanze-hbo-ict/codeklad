@@ -1,15 +1,16 @@
 # Implementation Plan: Klode minimal Python editor
 
 **Branch**: `001-python-editor` | **Date**: 2026-10-22 | **Spec**: [spec.md](spec.md)
-**Input**: Product-owner decisions recorded under #3; constitution v1.0.1.
-**Status**: Approved plan; local editor implementation under review (#15).
-School-environment acceptance and human merge/release gates remain pending.
+**Input**: Product-owner decisions under #3 and feedback #19–#24; constitution v1.0.1.
+**Status**: Revised feedback plan; actual school acceptance remains pending.
+Public Netlify deployment exists; revised changes still require review/human merge.
 
 ## Summary
 
 Build a static single-page JavaScript application with CodeMirror 6 and Pyodide
-in a module worker. Interactive input uses a shared-memory mailbox; editor code
-survives same-session reload through sessionStorage. Prove runtime input and
+in a module worker. Interactive input uses a shared-memory mailbox and is entered
+within the console, echoing accepted lines before later output. Source has no
+application-managed reload persistence. Prove runtime input and
 whitelisted loading before building the full interface. Keep all runtime assets
 on the approved origin. No framework, backend, extra packages, user file workflows,
 graphics, completion or AI features.
@@ -20,7 +21,7 @@ graphics, completion or AI features.
 Pin exact supported Node, Vite, CodeMirror and Pyodide versions during setup.
 **Dependencies**: Vite, explicit CodeMirror Python/highlighting/indentation extensions,
 locally packaged Pyodide runtime/stdlib; npm lockfile. Existing uv remains dev tooling.
-**Storage**: sessionStorage for current editor code; no backend or cross-session requirement.
+**Storage**: in-memory document only; no application-managed source persistence.
 **Validation**: production build, browser acceptance cases in quickstart, network
 origin audit, input/cancellation/reload scenarios; retain existing Tooling checks.
 **Target**: locked Windows exam laptop with whitelisted network access; actual
@@ -37,8 +38,8 @@ asset loading, ordinary copying into ans.app, one file main.py.
 
 Pre-design: pass. One-file Python/no AI, responsive themes, simple modern JS,
 proven editor, explicit spec, isolated work and independent review are retained.
-Post-design: pass. Exact exam evidence is gated, not claimed; no hosting vendor,
-new product scope or autonomous publication is selected. Node/Vite supplement
+Post-design: pass. Exact exam evidence is gated, not claimed; Netlify is selected by the product owner, with no
+autonomous publication. Node/Vite supplement
 uv tooling for browser assets and do not add a Python backend.
 
 ## Feasibility gate
@@ -50,8 +51,8 @@ LAN HTTPS use in a Windows/Edge VM. Under the continuation decision below, local
 UI implementation may proceed. Actual school browser, opening route, whitelist
 and candidate HTTPS host evidence remain an acceptance/exam-use release gate.
 No silent fallback to preloaded input or an unapproved CDN.
-Candidate hosting/deployment must follow the existing human gate; preparing this
-plan does not select hosting or authorise publication. Coordinate provisioning
+Netlify is the selected public host. Revised deployments must follow the human
+gate; preparing this plan does not authorise publication. Coordinate provisioning
 with #4 and report a blocker if the actual-environment gate cannot be executed.
 
 ## Project Structure
@@ -63,7 +64,7 @@ specs/001-python-editor/
   evidence/feasibility.md, evidence/acceptance.md  # local/actual results kept separate
 index.html
 src/
-  main.js, editor.js, output.js, input.js, session.js, theme.js, styles.css
+  main.js, editor.js, output.js, input.js, execution.js, theme.js, styles.css
   runtime/client.js, runtime/worker.js, runtime/input-mailbox.js
 public/runtime/<pinned-version>/
 scripts/vendor-runtime.mjs
@@ -73,7 +74,7 @@ package.json, package-lock.json, vite.config.js
 ## Delivery strategy
 
 1. Setup and isolated feasibility spike, with an independent evidence review.
-2. Editing/execution, then interactive input, clipboard/reload recovery, then themes.
+2. Editing/execution, then interactive input, exact clipboard/no source persistence, then themes.
 3. Build/origin audit and actual Windows acceptance evidence.
 4. Independent review and human merge decision for every implementation PR;
    publication follows only the approved release route.
@@ -97,3 +98,29 @@ before claiming exam suitability or releasing for exam use. T005–T006, T016 an
 T021 remain incomplete until that evidence is collected/reviewed. This decision
 supersedes the earlier implementation stop on unavailable school-device access;
 it does not weaken the product requirements or authorise production deployment.
+
+## Feedback-round implementation sequence (#19–#24)
+
+Review the revised specification first. Remove source save/restore and ans-specific
+UI; leave historical evidence unchanged. Keep code ownership independent of the
+executed snapshot. Then coordinate console DOM/CSS and upper editor controls in a
+single integration sequence: read-only safe transcript plus a labelled active input
+at its current prompt, internal console scrolling/focus, accepted-answer echo before
+worker continuation output. Preserve the shared mailbox and ordered output ACK
+protocol; no full REPL or output cap. Use accessible locally packaged theme icons
+and a simplified footer. Update public README/CONTRIBUTING from agreed behaviour.
+
+Validate new source initialization, exact input transcript/order, rejection and
+stale events, Stop/flood/rerun, transcript selection and focus at 1280×720/360×640.
+Retain existing same-origin, no-completion/AI and school acceptance boundaries.
+
+## Local-preview refinements (#26)
+
+Keep existing native input/form semantics and make only its presentation
+terminal-like: transparent undecorated input, native caret and Enter submission
+without a separate send button. Retain console focus indication and labels.
+Replace the theme group with one current-mode icon button cycling system, light,
+dark. Move the payoff below the workspace. Approved #27 adds one state-dependent
+execution button with a cancellable 300 ms reveal timer, immediate Stop during input
+wait and persistent Stop after resumption. Do not delay actual Stop or change the
+runtime/mailbox/ACK protocol. Loading/Stopping are disabled; failure offers Retry.

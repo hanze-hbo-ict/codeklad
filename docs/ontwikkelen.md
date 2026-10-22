@@ -77,4 +77,9 @@ CLI 1.2.2, Codex-skills, templates en Bash-scripts zijn lokaal beschikbaar.
 De bootstrap is via PR #5 gemerged. De workflow `Tooling` controleert de
 ontwikkelomgeving en meegeleverde Spec Kit-bestanden. Zie
 [branchbescherming en controles](branchbescherming.md) voor de inrichting en
-beperkingen van de mergegate. Hosting, preview en publicatie staan nog open.
+beperkingen van de mergegate.
+
+The public editor is live at https://klode.netlify.app/. See
+[hosting and release verification](hosting.md) for Netlify configuration and
+remaining operational/school-environment checks, and [CONTRIBUTING](../CONTRIBUTING.md)
+for the contributor workflow.
