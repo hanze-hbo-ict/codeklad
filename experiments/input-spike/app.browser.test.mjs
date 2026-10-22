@@ -45,10 +45,13 @@ try {
   async function answer(text) { await state('waiting-for-input'); await page.locator('#answer').fill(text); await page.locator('#answer').press('Enter'); }
   await page.goto(origin); await state('ready');
   const initialSource = await source();
+  assert.equal(await page.locator('#stop').count(), 0);
+  const actionWidth = (await page.locator('#run').boundingBox()).width;
   assert.equal(await page.locator('body').textContent().then((text) => /ans\.app|Runs in your browser|Python 3\.14|stays in this tab/.test(text)), false);
   assert.equal(await page.getByRole('link', { name: 'Klode on GitHub' }).getAttribute('href'), 'https://github.com/hanze-hbo-ict/klode');
   assert.equal(await page.evaluate(() => crossOriginIsolated), true);
-  await run('print(2 + 3)'); await state('ready');
+  await edit('print(2 + 3)'); await page.getByRole('button', { name: 'Run code', exact: true }).focus();
+  await page.keyboard.press('Space'); await state('ready');
   assert.equal(await page.locator('#output').textContent(), '5\n'); passed.push('run/edit');
   for (const [code, expected] of [['if :', /SyntaxError/], ['1 / 0', /ZeroDivisionError/]]) {
     await run(code); await state('ready'); assert.match(await page.locator('#error').textContent(), expected);
@@ -58,6 +61,8 @@ try {
   await state('waiting-for-input');
   assert.equal(await page.locator('#answer').evaluate((input) => input === document.activeElement), true);
   assert.equal(await page.locator('#submit').count(), 0);
+  assert.equal(await page.getByRole('button', { name: 'Stop', exact: true }).isEnabled(), true);
+  assert.equal((await page.locator('#run').boundingBox()).width, actionWidth);
   assert.equal(await page.getByRole('textbox', { name: 'Program input', exact: true }).count(), 1);
   assert.equal(await page.locator('#answer').evaluate((input) => { const css = getComputedStyle(input); return css.borderTopWidth === '0px' && css.borderBottomWidth === '0px' && css.outlineStyle === 'none' && css.backgroundColor === 'rgba(0, 0, 0, 0)'; }), true);
   assert.notEqual(await page.locator('.console-body').evaluate((body) => getComputedStyle(body).borderColor), 'rgba(0, 0, 0, 0)');
@@ -77,7 +82,7 @@ try {
   passed.push('exact name transcript; Enter, accepted-only echo and selectable readonly history');
   await run('first=input("First: ")\nsecond=input("Second: ")\nprint(repr(first), repr(second))');
   await state('waiting-for-input'); assert.equal(await page.locator('#output').textContent(), 'First: ');
-  assert.equal(await page.locator('#run').isDisabled(), true);
+  assert.equal(await page.getByRole('button', { name: 'Stop', exact: true }).isEnabled(), true);
   await theme('dark');
   assert.equal(await page.locator('html').getAttribute('data-theme'), 'dark');
   await answer(''); await answer('你好 🙂 café'); await state('ready');
@@ -90,7 +95,7 @@ try {
   for (const code of ['input("Wait: ")', 'while True:\n    pass', 'while True:\n    print("x")']) {
     await run(code); await state(code.startsWith('input') ? 'waiting-for-input' : 'running');
     if (code.includes('print')) await page.waitForTimeout(200);
-    await page.locator('#stop').click({ timeout: 5000 }); await state('ready');
+    await page.getByRole('button', { name: 'Stop', exact: true }).click({ timeout: 5000 }); await state('ready');
     assert.equal(await source(), code);
     await page.locator('#input-form').evaluate((form) => form.dispatchEvent(new Event('submit', { cancelable: true })));
     await run('print(5)'); await state('ready'); assert.equal(await page.locator('#output').textContent(), '5\n');
@@ -99,7 +104,7 @@ try {
   await run('input("Before edit: ")'); await state('waiting-for-input');
   const revised = 'print("edited during execution")'; await edit(revised);
   await theme('light'); assert.equal(await source(), revised);
-  await page.locator('#stop').click(); await state('ready'); assert.equal(await source(), revised);
+  await page.getByRole('button', { name: 'Stop', exact: true }).click(); await state('ready'); assert.equal(await source(), revised);
   await run('input("Continue: ")'); await state('waiting-for-input');
   await edit(revised); await answer('continue'); await state('ready'); assert.equal(await source(), revised);
   await run('input("Fail: ")\n1/0'); await state('waiting-for-input');
@@ -154,7 +159,7 @@ try {
       assert.match(await page.locator('#theme').getAttribute('aria-label'), new RegExp(mode, 'i'));
       assert.equal(await page.locator('#theme svg:visible').count(), 1);
     }
-    for (const id of ['run', 'stop', 'console-title']) await page.locator(`#${id}`).scrollIntoViewIfNeeded();
+    for (const id of ['run', 'console-title']) await page.locator(`#${id}`).scrollIntoViewIfNeeded();
   }
   await theme('system'); await page.emulateMedia({ colorScheme: 'dark' });
   await page.waitForFunction(() => document.documentElement.dataset.theme === 'dark');
@@ -210,12 +215,31 @@ try {
     assert.ok(requests.includes(`${origin}/runtime/314.0.7/${file}`), `Missing runtime request ${file}`);
   }
   passed.push('cold context same-origin worker/runtime audit');
+  await run('input("Keyboard stop: ")'); await state('waiting-for-input');
+  await page.getByRole('button', { name: 'Stop', exact: true }).focus(); await page.keyboard.press('Space');
+  await state('ready'); assert.equal(await page.getByRole('button', { name: 'Run code', exact: true }).isEnabled(), true);
+  passed.push('one stable execution button with keyboard Run/Stop and immediate Stop during input');
+  const retryContext = await browser.newContext();
+  let failWorker = true;
+  await retryContext.route('**/assets/worker-*.js', async (route) => {
+    if (failWorker) { failWorker = false; await route.abort(); } else await route.continue();
+  });
+  const retryPage = await retryContext.newPage(); await retryPage.goto(origin);
+  await retryPage.waitForFunction(() => document.querySelector('#status').dataset.state === 'failed');
+  assert.equal(await retryPage.getByRole('button', { name: 'Retry', exact: true }).isEnabled(), true);
+  await retryPage.locator('.cm-content').focus(); await retryPage.keyboard.press('ControlOrMeta+a'); await retryPage.keyboard.insertText('print("retry preserved source")');
+  await retryPage.getByRole('button', { name: 'Retry', exact: true }).click();
+  await retryPage.waitForFunction(() => document.querySelector('#status').dataset.state === 'ready');
+  await retryPage.getByRole('button', { name: 'Run code', exact: true }).click();
+  await retryPage.waitForFunction(() => document.querySelector('#output').textContent === 'retry preserved source\n');
+  assert.equal(await retryPage.getByRole('button', { name: 'Run code', exact: true }).isEnabled(), true);
+  await retryContext.close(); passed.push('failed worker offers Retry, recovers runtime and preserves edited source');
   const html = (await readFile('dist/index.html', 'utf8')).replaceAll('src="/assets/', `src="${origin}/assets/`).replaceAll('href="/assets/', `href="${origin}/assets/`);
   negative = createServer((req, res) => { res.setHeader('Content-Type', 'text/html'); res.end(html); });
   await new Promise((resolve) => negative.listen(4276, '127.0.0.1', resolve));
   const negativePage = await browser.newPage(); await negativePage.goto('http://127.0.0.1:4276');
   await negativePage.waitForFunction(() => document.querySelector('#status').dataset.state === 'failed');
-  assert.match(await negativePage.locator('#error').textContent(), /provided secure link/); assert.equal(await negativePage.locator('#run').isDisabled(), true); passed.push('missing isolation capability failure');
+  assert.match(await negativePage.locator('#error').textContent(), /provided secure link/); assert.equal(await negativePage.getByRole('button', { name: 'Retry', exact: true }).isEnabled(), true); passed.push('missing isolation capability failure');
   console.log(JSON.stringify({ result: 'pass', browser: browser.version(), cases: passed, requests: [...new Set(requests)] }, null, 2));
 } finally {
   await browser?.close(); if (negative) await new Promise((resolve) => negative.close(resolve)); preview.kill();
