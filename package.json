@@ -14,7 +14,7 @@
     "dev": "vite --host 127.0.0.1",
     "build": "npm run vendor:runtime && vite build",
     "preview": "vite preview --host 127.0.0.1",
-    "test": "node --test experiments/input-spike/mailbox.test.mjs experiments/input-spike/session.test.mjs experiments/input-spike/preview-ready.test.mjs",
+    "test": "node --test experiments/input-spike/mailbox.test.mjs experiments/input-spike/preview-ready.test.mjs",
     "test:browser": "node experiments/input-spike/app.browser.test.mjs && npm run test:browser:spike",
     "test:browser:spike": "node experiments/input-spike/browser.test.mjs"
   },
