@@ -98,15 +98,17 @@ system or change product criteria during implementation.
 
 ## Phase 8: Feedback round 1 (#19–#24)
 
-- [ ] T023 Review revised product/spec/plan/contracts before dependent implementation; record reviewed spec commit at #19/#20.
-- [ ] T024 [#20] Remove application source save/restore, storage warning and ans-specific UI instructions. Preserve current edits during execution/Stop/theme and exact native copy; verify initial content on reload with empty/nonempty edits and old stored values. Replace recovery assertions in current tests/docs; retain historical evidence for original commits.
-- [ ] T025 [#21] Integrate labelled input at the console prompt with safe read-only selectable history, accepted-only echo/newline before later output, internal reveal/focus and unchanged mailbox/ACK/Stop semantics. Cover exact example, empty/Unicode/repeated/no-newline, rejection/duplicate/stale/Stop/rerun and lossless output/flood cases.
-- [ ] T026 [#22] Move Run/Stop to upper editor header; coordinate DOM/CSS sequentially with T025. Add padded rounded unclipped accessible editor/console focus. Verify light/dark at 1280×720/360×640, long content and pending input without horizontal overflow.
-- [ ] T027 [#23] Replace dropdown with accessible local system/light/dark icons; simplify footer, keep approved copy/taglines, add repository link, remove hardcoded version/browser copy. Verify selected state, keyboard/focus and source/runtime/transcript preservation.
-- [ ] T028 [#24] Publish-facing README plus CONTRIBUTING linking existing governance, honest live/planned features and browser limits, local quickstart and human/agent workflow. Keep broad translation under #8.
-- [ ] T029 Independently review feedback diff and relevant build/browser results; report issue-specific outcomes and remaining actual-school gate. Prepare PR for human merge decision; no autonomous merge/publication.
+- [X] T023 Review revised product/spec/plan/contracts before dependent implementation; record reviewed spec commit at #19/#20.
+- [X] T024 [#20] Remove application source save/restore, storage warning and ans-specific UI instructions. Preserve current edits during execution/Stop/theme and exact native copy; verify initial content on reload with empty/nonempty edits and old stored values. Replace recovery assertions in current tests/docs; retain historical evidence for original commits.
+- [X] T025 [#21] Integrate labelled input at the console prompt with safe read-only selectable history, accepted-only echo/newline before later output, internal reveal/focus and unchanged mailbox/ACK/Stop semantics. Cover exact example, empty/Unicode/repeated/no-newline, rejection/duplicate/stale/Stop/rerun and lossless output/flood cases.
+- [X] T026 [#22] Move Run/Stop to upper editor header; coordinate DOM/CSS sequentially with T025. Add padded rounded unclipped accessible editor/console focus. Verify light/dark at 1280×720/360×640, long content and pending input without horizontal overflow.
+- [X] T027 [#23] Replace dropdown with accessible local system/light/dark icons; simplify footer, keep approved copy/taglines, add repository link, remove hardcoded version/browser copy. Verify selected state, keyboard/focus and source/runtime/transcript preservation.
+- [X] T028 [#24] Publish-facing README plus CONTRIBUTING linking existing governance, honest live/planned features and browser limits, local quickstart and human/agent workflow. Keep broad translation under #8.
+- [X] T029 Independently review feedback diff and relevant build/browser results; report issue-specific outcomes and remaining actual-school gate. Prepare PR for human merge decision; no autonomous merge/publication.
 
 T023 precedes T024–T028. T025/T026 share console/header/focus interfaces and must
 be integrated sequentially or have explicit disjoint ownership. T027 may not edit
 their shared files concurrently. T028 follows the revised agreed behaviour and
 distinguishes pending changes from live deployment. T029 follows relevant checks.
+
+Feedback-round local implementation/review evidence: [feedback-round1.md](evidence/feedback-round1.md). T029 completion prepares the human gate; it does not record a merge or school acceptance.
