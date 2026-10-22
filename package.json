@@ -1,0 +1,31 @@
+{
+  "name": "klode",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "engines": {
+    "node": "24.19.0",
+    "npm": "11.16.0"
+  },
+  "packageManager": "npm@11.16.0",
+  "scripts": {
+    "vendor:runtime": "node scripts/vendor-runtime.mjs",
+    "predev": "npm run vendor:runtime",
+    "dev": "vite --host 127.0.0.1",
+    "build": "npm run vendor:runtime && vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "test": "node --test experiments/input-spike/mailbox.test.mjs",
+    "test:browser": "node experiments/input-spike/browser.test.mjs"
+  },
+  "dependencies": {
+    "@codemirror/lang-python": "6.2.1",
+    "@codemirror/language": "6.13.1",
+    "@codemirror/state": "6.7.6",
+    "@codemirror/view": "6.43.15"
+  },
+  "devDependencies": {
+    "playwright-core": "1.64.1",
+    "pyodide": "314.0.7",
+    "vite": "8.3.5"
+  }
+}

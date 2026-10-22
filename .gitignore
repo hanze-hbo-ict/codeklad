@@ -6,3 +6,6 @@ __pycache__/
 .env
 .env.*
 !.env.example
+node_modules/
+dist/
+public/runtime/314.0.7/
