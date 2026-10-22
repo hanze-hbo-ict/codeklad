@@ -21,8 +21,11 @@ assistance and with control over availability and functionality.
 - Python `input()` must be interactive. An input field in the interface, inspired
   by wasm.ch, is the proposed interaction; exact implementation is to be validated.
 - Students transfer code by copying from the editor and pasting into ans.app.
-- Code persistence between sessions is not required. This does not decide whether
-  code should survive a page reload within the same session.
+- Preserve current editor code across page reloads within the same session;
+  persistence between sessions is not required.
+- First-version Python scope is the runtime-supported standard library, without
+  extra packages, user file workflows or graphics.
+- Provide syntax highlighting and automatic indentation, without code completion.
 - SQL and other languages are future wishes, outside the first version.
 
 ## Proposed technical direction
@@ -35,17 +38,17 @@ A URL whitelist is restricted connectivity, not a requirement for fully offline 
 
 ## Remaining questions
 
-- Required standard-library modules, external packages, files and graphics.
 - Exact Windows browser/version, opening route (tab/window/embed) and an exam
   reference exercise; these are needed for the actual-environment test.
-- Permitted editor assistance, including automatic completion.
-- Code recovery on reload within a session and preference persistence.
+- Preference persistence is not required by the current scope.
 - Exact whitelisted URL/origin and hosting response-header capabilities.
 
 ## Decision provenance and repository identity
 
 The product owner confirmed the exam constraints, interactive input, copy/paste
 transfer, lack of a cross-session persistence requirement, and the name Klode on
-2026-10-22. These decisions are recorded under issue #3. The physical repository
+2026-10-22. The product owner subsequently accepted standard-library-only scope
+without extra packages/files/graphics, syntax highlighting and indentation without
+completion, and same-session reload recovery. These decisions are recorded under issue #3. The physical repository
 and local directory still use `codeklad` while the rename is prepared separately;
 existing URLs and identifiers remain valid during review.

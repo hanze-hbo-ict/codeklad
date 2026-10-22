@@ -3,9 +3,9 @@
 **Feature Branch**: `001-python-editor`
 **Created**: 2026-10-21
 **Updated**: 2026-10-22
-**Status**: Draft; confirmed decisions recorded, remaining scope questions open.
+**Status**: Proposed baseline; product scope clarified, technical plan ready for review.
 **Input**: Product-owner discussion, issue #3, `specs/product.md`, constitution
-v1.0.0; latest merged project-agreement base `c95b156`.
+v1.0.1; merged product-name base `bb356fc`.
 
 Klode is the product name selected on 2026-10-22. Concrete error-handling and
 acceptance proposals below remain subject to the human product owner's review.
@@ -19,8 +19,11 @@ acceptance proposals below remain subject to the human product owner's review.
 - `input()` must be interactive. An interface input field is proposed, inspired
   by wasm.ch; the implementation needs feasibility evidence.
 - Transfer: copy code from the editor and paste it into ans.app.
-- There is no requirement to preserve code between sessions. Reload recovery
-  within a session has not been decided.
+- Preserve code on page reload within the same session; cross-session persistence
+  is not required.
+- Use the standard library supported by the selected browser runtime; no extra
+  packages, user file workflows or graphics in the first version.
+- Provide syntax highlighting and automatic indentation; no code completion.
 - Product name: Klode, replacing Codeklad.
 
 ## User Scenarios & Testing
@@ -75,7 +78,9 @@ run a reference exercise and paste its code into ans.app.
    **Then** no required resource needs an unapproved URL.
 2. **Given** multiline code in the editor, **When** the student selects and copies
    it and pastes it into ans.app, **Then** content, newlines and indentation survive.
-3. **Given** a completed session, **When** a new session starts,
+3. **Given** current code, **When** the page is reloaded within the same session,
+   **Then** the exact editor source, including an empty document, is restored.
+4. **Given** a completed session, **When** a new session starts,
    **Then** recovering code from the earlier session is not an acceptance requirement.
 
 ### User Story 4 - Choose a readable display (Priority: P2)
@@ -102,7 +107,9 @@ Proposed error handling, to be confirmed in review:
 - An endless loop or input wait can be stopped without losing current editor code.
 - Repeated run requests do not create confusing concurrent executions.
 - Multiline code and blank input lines are preserved correctly.
-- Reload recovery and permitted editor assistance remain open under Q3.
+- Reload restores the latest successfully saved same-session code, including empty
+  code. If browser storage is unavailable, report the limitation without blocking
+  editing or claiming recovery works.
 
 ## Requirements
 
@@ -119,32 +126,35 @@ Proposed error handling, to be confirmed in review:
   with ans.app and only the approved editor URLs accessible.
 - **FR-008**: Exclude SQL and other languages from the first version.
 - **FR-009**: Support copying code into ans.app with line breaks and indentation intact.
-- **FR-010**: Cross-session code persistence is not required; do not infer a reload
-  recovery policy or a prohibition on storage from this decision.
+- **FR-010**: Preserve current code across reloads within a session; cross-session
+  persistence is not required.
+- **FR-011**: Use the selected runtime's supported standard library, without extra
+  packages, user file workflows or graphics. Document runtime compatibility limits.
+- **FR-012**: Provide syntax highlighting and automatic indentation, without code
+  completion. No AI assistance is allowed.
 
-### Remaining product decisions and test prerequisites
+### Actual-environment test prerequisites
 
-- **Q1 — Exam evidence**: [NEEDS CLARIFICATION: Confirm the Windows browser/version,
-  tab/window/embed opening route, whitelisted URL and reference exercise.]
-- **Q2 — Python scope**: [NEEDS CLARIFICATION: Which standard-library modules,
-  external packages, files and graphics are required for the first version?]
-- **Q3 — Editor assistance and same-session recovery**: [NEEDS CLARIFICATION:
-  Is automatic completion allowed; should code survive a reload within a session,
-  and should preferences persist?]
+Before claiming exam suitability, record the Windows browser/version, actual
+opening route (tab/window/embed), approved editor URL and a reference exercise.
+These are validation prerequisites, not permission to invent new product scope.
+The plan can proceed with a feasibility gate that verifies these details. If
+browser/hosting restrictions invalidate the proposed runtime design, stop and
+return to the product owner instead of weakening interactive input or the whitelist.
 
 ### Key Entities
 
 - **Program**: Student-authored contents of `main.py`.
 - **Execution**: One run with output, errors and zero or more input requests.
 - **Input request**: A pending request for one line, answered during the same run.
-- **Theme preference**: System-following or manual light/dark; retention undecided.
+- **Theme preference**: System-following or manual light/dark; cross-session retention is not required.
 - **Reference exercise**: Exam task with required capabilities and expected outcomes.
 
 ## Success Criteria
 
 ### Measurable Outcomes
 
-Acceptance proposals to be confirmed by the product owner:
+Concrete acceptance proposals for review:
 
 - **SC-001**: `print(2 + 3)` produces `5`; editing and running again works.
 - **SC-002**: A syntax error is displayed and the corrected code runs in the same editor.
@@ -156,6 +166,11 @@ Acceptance proposals to be confirmed by the product owner:
 - **SC-006**: At viewport widths of 360 and 1280 CSS pixels, editor, input/output
   and necessary controls remain reachable.
 - **SC-007**: System and both manual themes work without removing current code.
+- **SC-008**: Reload after editing restores the same code in that session; this
+  includes deliberate deletion to an empty editor. A new session has no recovery
+  requirement.
+- **SC-009**: The editor highlights syntax and indents automatically without
+  suggesting completions or AI-generated content.
 
 Evidence records the application commit, browser/version, whitelist, opening route,
 reference cases, expected/actual results and limitations. A normal-browser test is
@@ -166,14 +181,15 @@ reported separately from actual exam-laptop evidence.
 - The product owner provides or confirms the remaining exam test details.
 - Hosting has not been selected and actual exam validation has not been performed.
 - A URL whitelist does not require operation with every network connection disabled.
-- Extra packages, graphics, multiple files, accounts and reload recovery have not
-  been silently included or ruled out.
+- Extra packages, user file workflows and graphics are excluded by the accepted
+  first-version scope. Account functionality is not part of this feature.
 - Pyodide, a worker, an established editor and same-origin assets remain technical
   proposals to validate, rather than product decisions.
 
 ## Next steps and stop conditions
 
-Resolve remaining scope questions and confirm proposed criteria, then produce
-an implementation plan, feasibility work and implementation tasks. Do not
-implement or publish an app before scope agreement. Escalate exam restrictions
-that require scope or criteria changes to the product owner.
+Review this specification and its implementation plan/tasks. Begin with the
+feasibility gate before implementing the full editor. Do not claim actual exam
+compatibility until the Windows/whitelist cases pass, and do not publish before
+the human merge gate and release checks. Escalate restrictions that require scope
+or criteria changes to the product owner.
