@@ -1,8 +1,8 @@
-# Codeklad — projectprincipes
+# Klode — projectprincipes
 
 ## I. Eenvoud en toetsgebruik
 
-Codeklad biedt een minimale programmeeromgeving zonder AI-assistentie.
+Klode biedt een minimale programmeeromgeving zonder AI-assistentie.
 De eerste versie ondersteunt Python in één bestand, `main.py`, met een editor
 en uitvoer/invoer. Andere talen vallen buiten deze eerste versie.
 
@@ -53,6 +53,9 @@ Falende releasecontroles stoppen publicatie en leiden tot terugkoppeling.
 Spec Kit-commands en workflows vervangen deze bevoegdheden en gates niet.
 Wijzigingen aan deze principes vereisen een expliciet product-ownerbesluit.
 
-**Versie**: 1.0.0 | **Vastgelegd**: 2026-10-21
+**Version**: 1.0.1 | **Ratified**: 2026-10-21 | **Last Amended**: 2026-10-22
 
 Bron: door de product owner in het bootstrapgesprek bevestigde afspraken.
+
+Amendment 1.0.1 records the product-owner-approved name Klode (2026-10-22).
+The principles and governance are unchanged; see issue #10.
