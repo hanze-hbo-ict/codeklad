@@ -1,0 +1,38 @@
+name: Application
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  app:
+    name: Application checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version-file: .node-version
+      - name: Install pinned npm and locked dependencies
+        run: |
+          npm install --global npm@11.16.0
+          npm ci
+      - name: Unit and runtime regressions
+        run: npm test
+      - name: Build static application and verified runtime
+        run: npm run build
+      - name: Find runner Chrome
+        run: |
+          chrome_path="$(command -v google-chrome || command -v chromium || command -v chromium-browser)"
+          test -n "$chrome_path"
+          echo "CHROME_BIN=$chrome_path" >> "$GITHUB_ENV"
+          "$chrome_path" --version
+      - name: Application and spike browser regressions
+        run: npm run test:browser

@@ -2,7 +2,8 @@
 
 **Branch**: `001-python-editor` | **Date**: 2026-10-22 | **Spec**: [spec.md](spec.md)
 **Input**: Product-owner decisions recorded under #3; constitution v1.0.1.
-**Status**: Proposed design; review and human merge gate pending. No application built.
+**Status**: Approved plan; local editor implementation under review (#15).
+School-environment acceptance and human merge/release gates remain pending.
 
 ## Summary
 
@@ -42,11 +43,12 @@ uv tooling for browser assets and do not add a Python backend.
 
 ## Feasibility gate
 
-Before full UI implementation, a minimal runtime spike must prove input, Unicode,
+The implemented local runtime spike proves input, Unicode,
 empty answers, visible non-newline prompts, Stop/restart, same-origin cold loading
-and required headers on a candidate HTTPS origin. Record the actual exam browser,
-opening route and whitelist. Actual exam-laptop failure blocks full implementation;
-if access is unavailable, report the missing evidence and stop at this checkpoint.
+and required local isolation headers. The product owner also reports successful
+LAN HTTPS use in a Windows/Edge VM. Under the continuation decision below, local
+UI implementation may proceed. Actual school browser, opening route, whitelist
+and candidate HTTPS host evidence remain an acceptance/exam-use release gate.
 No silent fallback to preloaded input or an unapproved CDN.
 Candidate hosting/deployment must follow the existing human gate; preparing this
 plan does not select hosting or authorise publication. Coordinate provisioning
@@ -58,7 +60,7 @@ with #4 and report a blocker if the actual-environment gate cannot be executed.
 specs/001-python-editor/
   spec.md, plan.md, research.md, data-model.md, quickstart.md, tasks.md
   contracts/ui-runtime.md
-  evidence/feasibility.md, evidence/acceptance.md  # written by future tasks
+  evidence/feasibility.md, evidence/acceptance.md  # local/actual results kept separate
 index.html
 src/
   main.js, editor.js, output.js, input.js, session.js, theme.js, styles.css
@@ -80,3 +82,18 @@ Treat each story as an independently verifiable increment. Full first-version
 acceptance requires all P1 stories and the agreed responsive/theme requirements.
 GitHub issues own status and handoffs; tasks.md is the dependency decomposition.
 No constitution exceptions or additional complexity waivers are proposed.
+
+## Product-owner continuation decision — 2026-10-22
+
+The product owner reports the LAN HTTPS input spike works in their libvirt
+Windows VM using Edge, and explicitly authorises continuing with the editor.
+This is user-reported VM smoke evidence; exact OS/browser versions and per-case
+results were not supplied. It is not a passed school-laptop whitelist test.
+
+On this basis, local UI/runtime implementation may proceed before the remaining
+school-environment evidence. The actual Windows school whitelist, opening route,
+reference exercise, cold loading and ans.app clipboard checks remain mandatory
+before claiming exam suitability or releasing for exam use. T005–T006, T016 and
+T021 remain incomplete until that evidence is collected/reviewed. This decision
+supersedes the earlier implementation stop on unavailable school-device access;
+it does not weaken the product requirements or authorise production deployment.

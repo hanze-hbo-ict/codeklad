@@ -1,14 +1,16 @@
-# Planned validation guide
+# Validation guide
 
-These commands and paths describe the future implementation; they are not runnable
-application instructions yet. Existing tooling checks can already run via uv.
+These commands validate the local implementation; actual school acceptance is
+recorded separately. Existing tooling checks also run via uv.
 
-## Setup after implementation
+## Local setup
 
-Use the pinned Node version recorded by setup, then `npm ci`, `npm run dev` and
-`npm run build`. The runtime-vendoring script is wired into the build and checks
+Use Node 24.19.0/npm 11.16.0, then `npm ci`, `npm test`, `npm run dev` and
+`npm run build`. The editor opens at `/`; the input spike remains under
+`/experiments/input-spike/index.html`. The runtime-vendoring script is wired into the build and checks
 pinned assets. Run `npm run preview` with isolation headers configured for validation.
-The production host must return the same headers; a successful dev server alone
+Run `npm run test:browser` with installed Chrome/Edge (`CHROME_BIN` override)
+for application and spike regressions. The production host must return the same headers; a successful dev server alone
 is insufficient evidence. No automatic deployment is part of these commands.
 
 ## Feasibility evidence

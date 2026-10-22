@@ -34,5 +34,8 @@ no embedded route is assumed. Confirm the Edge version, actual opening route,
 approved origin and all required path rules with the school. Record a cold-cache
 network log with every unapproved destination blocked. Verify COOP does not break
 the school's opening workflow and native copy/paste into ans.app separately.
-Do not proceed to the full editor until the actual-environment feasibility gate
-and independent review are complete.
+The product owner authorised local editor implementation after reporting the
+HTTPS spike works in a Windows/Edge VM. Actual school-environment evidence and
+independent review remain mandatory before exam-use release; see the dated
+continuation decision in the feature specification. The product editor is at
+`/`; retain the isolated spike path for technical validation.

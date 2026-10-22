@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Klode — Python editor</title>
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand"><span class="brand-mark" aria-hidden="true">k.</span><div><h1>Klode</h1><p>A little room for Python.</p></div></div>
+    <label class="theme-control" for="theme">Appearance <select id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label>
+  </header>
+  <main>
+    <div class="workspace-heading"><p class="eyebrow">PYTHON WORKSPACE</p><p class="session-note">Your code stays in this tab when you reload.</p></div>
+    <p id="storage-warning" class="warning" role="status" hidden></p>
+    <div class="workspace">
+      <section class="panel editor-panel" aria-labelledby="filename">
+        <div class="panel-header"><h2 id="filename"><span class="file-dot" aria-hidden="true"></span>main.py</h2><span class="panel-note">Python</span></div>
+        <div id="editor"></div>
+        <div class="editor-footer"><span>Select your code and copy it into ans.app.</span><span>Ctrl + C</span></div>
+      </section>
+      <section class="panel console-panel" aria-labelledby="console-title">
+        <div class="panel-header"><h2 id="console-title">Console</h2><span id="status" role="status" data-state="loading">Loading Python…</span></div>
+        <div class="console-body"><p id="output-placeholder">Run your code to see the result here.</p><textarea id="output" readonly spellcheck="false" aria-label="Program output"></textarea><pre id="error" role="alert" hidden></pre></div>
+        <form id="input-form" hidden>
+          <label for="answer">Program input</label>
+          <div class="input-row"><input id="answer" type="text" autocomplete="off" spellcheck="false" aria-describedby="input-help"><button id="submit" type="submit">Send <span aria-hidden="true">↵</span></button></div>
+          <p id="input-help">Enter one line, then press Enter. An empty answer is allowed.</p>
+        </form>
+      </section>
+    </div>
+    <div class="run-bar"><p>One file. One idea at a time.</p><div class="run-actions"><button id="stop" type="button" disabled>Stop</button><button id="run" class="primary" type="button" disabled><span aria-hidden="true">▶</span> Run code</button></div></div>
+  </main>
+  <footer class="app-footer"><span>Runs in your browser · Python 3.14</span><span>No code completion or AI assistance</span></footer>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
