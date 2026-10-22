@@ -1,36 +1,54 @@
-# Productspecificatie — concept
+# Product specification — draft
 
-Status: vastgelegde uitgangspunten en open vragen; nog geen uitvoerbare featurespec.
+Status: agreed product direction and remaining questions; no implemented application.
+Product name: **Klode**, selected by the product owner on 2026-10-22 (formerly Codeklad).
 
-## Doel
+## Goal
 
-Een eenvoudige online editor voor gebruik vanuit een besloten toetsomgeving,
-zonder AI-assistentie en met controle over beschikbaarheid en functionaliteit.
+Provide a minimal online programming editor for education and exams, without AI
+assistance and with control over availability and functionality.
 
-## Vastgelegde uitgangspunten
+## Agreed requirements
 
-- Eerste versie: Python, één bestand `main.py`.
-- Minimale interface met editor en uitvoer/invoer.
-- Responsieve layout, ook bruikbaar op kleinere schermen.
-- Systeemthema volgen en handmatig kunnen wisselen tussen licht en donker.
-- Voorkeur voor modern JavaScript en een eenvoudige bouw- en onderhoudsroute.
-- Gebruik beproefde bibliotheken waar ze waarde toevoegen, bijvoorbeeld de editor.
-- Zelfstandige repository, lokaal onder `/home/misja/code/hanze/` en upstream
-  onder de GitHub-organisatie `hanze-hbo-ict`.
+- First version: Python in one file, `main.py`, with editor and input/output.
+- Responsive layout, including smaller screens.
+- Follow the system theme with a manual light/dark override.
+- Prefer modern JavaScript and a simple build/maintenance process; use proven
+  libraries where they add value, especially for editing.
+- Exam devices are locked Windows laptops. Internet access is restricted by a URL
+  whitelist to ans.app and selected editor environments; no additional specialised
+  lockdown software was identified by the product owner.
+- Python `input()` must be interactive. An input field in the interface, inspired
+  by wasm.ch, is the proposed interaction; exact implementation is to be validated.
+- Students transfer code by copying from the editor and pasting into ans.app.
+- Preserve current editor code across page reloads within the same session;
+  persistence between sessions is not required.
+- First-version Python scope is the runtime-supported standard library, without
+  extra packages, user file workflows or graphics.
+- Provide syntax highlighting and automatic indentation, without code completion.
+- SQL and other languages are future wishes, outside the first version.
 
-## Voorgestelde technische richting
+## Proposed technical direction
 
-Pyodide in een Web Worker, een bestaande editorbibliotheek en alle benodigde
-bestanden vanaf hetzelfde domein. Statische hosting, mogelijk Netlify.
-De haalbaarheid moet in de daadwerkelijke toetsomgeving worden vastgesteld.
+Pyodide in a Web Worker, an established editor library and all required assets
+served from an allowed origin. Static hosting remains a proposal; Netlify was
+mentioned but not selected. Feasibility must be demonstrated on an actual exam
+laptop with the whitelist in effect, including a cold load without cached assets.
+A URL whitelist is restricted connectivity, not a requirement for fully offline use.
 
-## Open vragen vóór uitwerking van acceptatiecriteria
+## Remaining questions
 
-- Vereiste standaardbibliotheek, packages, bestanden en eventuele grafieken.
-- Interactieve `input()` versus vooraf opgegeven invoer.
-- Browser/lockdownsoftware en openen in tab, venster of embed.
-- Overdracht van code naar de toets: kopiëren/plakken of downloaden.
-- Toegestane editorhulp, waaronder automatische aanvulling.
-- Bewaren van code en voorkeuren tijdens en tussen sessies.
+- Exact Windows browser/version, opening route (tab/window/embed) and an exam
+  reference exercise; these are needed for the actual-environment test.
+- Preference persistence is not required by the current scope.
+- Exact whitelisted URL/origin and hosting response-header capabilities.
 
-SQL en andere talen zijn toekomstwensen en vallen buiten de eerste versie.
+## Decision provenance and repository identity
+
+The product owner confirmed the exam constraints, interactive input, copy/paste
+transfer, lack of a cross-session persistence requirement, and the name Klode on
+2026-10-22. The product owner subsequently accepted standard-library-only scope
+without extra packages/files/graphics, syntax highlighting and indentation without
+completion, and same-session reload recovery. These decisions are recorded under issue #3. The physical repository
+and local directory still use `codeklad` while the rename is prepared separately;
+existing URLs and identifiers remain valid during review.
