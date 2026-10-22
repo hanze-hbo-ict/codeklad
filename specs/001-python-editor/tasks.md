@@ -115,7 +115,9 @@ Feedback-round local implementation/review evidence: [feedback-round1.md](eviden
 
 ## Phase 9: Local-preview refinements (#26)
 
-- [ ] T030 Review the refinement specification before changing the app. Record the Run/Stop decision separately; do not implement an unconfirmed proposal.
-- [ ] T031 Replace the theme group with one accessible cycling current-mode icon button; move the payoff below the editor/workspace.
-- [ ] T032 Remove visible input decoration and send button; preserve native Enter/caret, accessible naming, console focus, exact echo and existing runtime/input safety.
-- [ ] T033 Run relevant browser/visual regressions, obtain independent review, update PR #25 and the local preview; retain the human merge gate.
+- [X] T030 Review the refinement specification before changing the app. Record the Run/Stop decision separately; do not implement an unconfirmed proposal.
+- [X] T031 Replace the theme group with one accessible cycling current-mode icon button; move the payoff below the editor/workspace.
+- [X] T032 Remove visible input decoration and send button; preserve native Enter/caret, accessible naming, console focus, exact echo and existing runtime/input safety.
+- [X] T033 Run relevant browser/visual regressions, obtain independent review, update PR #25 and the local preview; retain the human merge gate.
+
+Run/Stop decision remains open under #27; it is not part of completed #26 presentation work.

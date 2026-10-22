@@ -64,3 +64,30 @@ Actual restricted school Windows/Edge browser/version, opening route, cold-load
 whitelist and reference exercise/ans.app clipboard evidence remain under #13.
 Local Chrome and the earlier user-reported Windows VM smoke test do not establish
 that separate school acceptance.
+
+## Local-preview refinement acceptance (#26)
+
+The product owner then requested a single cycling theme control, the payoff back
+below the workspace and visually undecorated console input without a Send button.
+Updated spec `7403d75` was independently approved before app commit `8f87e90`.
+The complete refinement candidate `b90b836942f49c92c9438c2b07443525d1c8ce3c` was
+independently approved with no findings. The reviewer inspected the implementation,
+updated test helpers, mobile screenshot and passing browser report without editing
+the implementation. This section/task-status update is the orchestrator's report.
+
+Local validation passes: six unit/runtime checks, production build, 18 application
+browser groups, seven isolated-spike groups, tooling metadata and whitespace.
+Browser: Chrome156.0.8078.47. At1280×720/360×640, the one native button displays only
+the current mode's SVG, names current/next mode and cycles System→Light→Dark using
+click/Enter/Space. System following/manual overrides and current source remain
+intact. Input is transparent, borderless and without a Send button; native Enter
+submission, accessible name/help and console-level focus remain. The exact name
+example, empty/Unicode/repeated/oversized/stale input, Stop, complete10000-line
+output, edits during execution and native clipboard cases still pass. The payoff
+sits below the workspace. Visual light/dark screens preserve unclipped focus.
+
+The updated static build is served at the existing LAN URL
+https://192.168.1.5:4444/ using the existing certificate and isolation headers.
+Run/Stop behaviour is deliberately unchanged; the open product decision is tracked
+separately in #27. Neither this review nor the preview authorises production merge
+or claims actual-school acceptance.
