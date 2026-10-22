@@ -120,4 +120,10 @@ Feedback-round local implementation/review evidence: [feedback-round1.md](eviden
 - [X] T032 Remove visible input decoration and send button; preserve native Enter/caret, accessible naming, console focus, exact echo and existing runtime/input safety.
 - [X] T033 Run relevant browser/visual regressions, obtain independent review, update PR #25 and the local preview; retain the human merge gate.
 
-Run/Stop decision remains open under #27; it is not part of completed #26 presentation work.
+Run/Stop is approved under #27; it is separate from completed #26 presentation work.
+
+## Phase 10: Single execution button (#27)
+
+- [ ] T034 Independently review the approved single-control/state/delay specification.
+- [ ] T035 Implement one stable native Run code/Stop/Retry button. Cancel/invalidate initial300ms reveal timers, reveal Stop immediately on input wait, preserve it through resumption and dispatch actual Stop immediately. Keep loading/stopping disabled, ordinary errors as Run code, no idle reset or lifecycle change.
+- [ ] T036 Verify deterministic timer/state boundaries and browser short/long/input/flood/Stop/retry/focus/source scenarios, obtain independent review and update PR25/local preview for the human merge decision.

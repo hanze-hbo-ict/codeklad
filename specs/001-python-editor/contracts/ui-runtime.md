@@ -2,9 +2,10 @@
 
 ## User interaction
 
-One editor labelled main.py, Run and Stop, output/error region, a labelled
+One editor labelled main.py, one state-dependent Run code/Stop/Retry action,
+output/error region, a labelled
 line-input control within the console at its prompt when Python requests input,
-and one accessible icon button cycling System → Light → Dark → System. Run/Stop are in the upper editor header.
+and one accessible icon button cycling System → Light → Dark → System. The execution button is in the upper editor header.
 No completion UI, AI, package-install controls, file manager or graphics panel.
 Allow normal select/copy shortcuts without rewriting selected code. Do not save or
 restore source through application-managed storage; reload starts initial content.
@@ -66,7 +67,11 @@ modules/builtins can persist until Stop. This is not a security sandbox.
 
 Application state is exposed in `#status[data-state]`: loading, ready, running,
 waiting-for-input, stopping, failed. The visible labels are plain English.
-`#run` is enabled only when ready; `#stop` resets the runtime (Retry after failure).
+`#run` is the single execution action. Ready offers Run code; an initial running
+state keeps it disabled for300ms, then offers Stop. Input wait offers Stop
+immediately and input resumption retains Stop. Loading/Stopping are disabled,
+failed runtime availability offers Retry. Ordinary Python errors return to ready.
+Stop terminates/reinitialises the worker immediately; no idle reset action remains.
 Editor source lives independently and survives runtime termination.
 
 Feedback #20 supersedes the original source-storage contract: do not read or write
@@ -109,6 +114,17 @@ transparent background and no border/underline/box or Enter/Send button. Enter
 submits through the native line-input form. Preserve accessible naming/help and
 console-level focus indication, accepted-only echo and request identity checks.
 The payoff sits below the editor/workspace rather than above the console.
-Run/Stop remains unchanged pending a separate product-owner decision.
+The approved #27 execution interaction below supersedes the earlier adjacent buttons.
 
 The console starts empty: omit the instructional “Run your code to see the result here.” placeholder. Only actual program output, input and errors appear in its transcript. Product-owner refinement under #26.
+
+## Single execution control and reveal timer (#27)
+
+One native button in a stable position/width dispatches the currently offered
+action. Ready→running starts one300ms Stop-reveal timer; ready/loading/stopping/
+failed or a new run cancels/invalidates it. Short runs must not receive a late
+Stop label. Waiting-for-input bypasses the delay and keeps Stop enabled on
+subsequent running/input states. Stop clicks call termination immediately; there
+is no execution time limit. Preserve source, focus, input identity and output ACK.
+Use disabled Loading…/Stopping… labels as applicable and an enabled Retry when
+initialisation/worker availability fails. A Python program error is not Retry.

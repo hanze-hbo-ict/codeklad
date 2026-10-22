@@ -146,8 +146,15 @@ Agreed error handling:
 - **FR-012**: Provide syntax highlighting and automatic indentation, without code
   completion. No AI assistance is allowed.
 
-- **FR-013**: Put Run/Stop in the upper editor header with correct enabled states
-  and keyboard order. Retain responsive reachability at short/narrow sizes.
+- **FR-013**: Put one state-dependent Run code/Stop/Retry button in a stable
+  upper editor-header position and width, with native keyboard operation. Run code
+  starts execution from ready. Keep it disabled for the initial 300ms of a run,
+  then show enabled Stop if still running. Input wait shows Stop immediately and
+  resuming after input keeps Stop available. Loading/Stopping are disabled; failed
+  runtime initialisation offers Retry. Completion/ordinary Python error returns to
+  Run code. Cancel stale timers on state changes and new runs; never delay a Stop
+  click or add an automatic execution timeout. No idle Stop/reset control. Preserve
+  current source and responsive reachability at short/narrow sizes.
 - **FR-014**: Give editor and console clear, rounded, padded keyboard focus in both
   themes, without clipping at the gutter or obscuring text/selection.
 - **FR-015**: Use one keyboard-operable theme button cycling System → Light →
@@ -261,5 +268,15 @@ changes. No packages, files, extra language or standalone REPL is added.
 The product owner requests one cycling theme icon, the payoff below the editor
 and console input presented as text/caret without field decoration or a send
 button. These refinements supersede the three-button/prompt-field presentation
-in the initial feedback implementation. Run/Stop interaction remains a separate
-open product choice; do not change it until the product owner confirms an option.
+in the initial feedback implementation. The later approved Run/Stop decision
+under #27 replaces adjacent controls with the single button specified in FR-013.
+
+## Run/Stop decision — 2026-10-22 (#27)
+
+The product owner approved one button on the same spot and requested delayed Stop
+appearance for short runs. Use an initial300ms presentation delay, with immediate
+Stop for input wait and no delay on the actual Stop action. Keep Run code disabled
+during that brief delay; console status already indicates Running. Retain Stop
+through input/resumption. Retry is for failed runtime availability; ordinary Python
+errors remain console errors followed by Run code. This removes idle reset from
+the main action without adding a Reset control or changing worker/cache semantics.

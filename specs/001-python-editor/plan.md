@@ -120,5 +120,7 @@ Keep existing native input/form semantics and make only its presentation
 terminal-like: transparent undecorated input, native caret and Enter submission
 without a separate send button. Retain console focus indication and labels.
 Replace the theme group with one current-mode icon button cycling system, light,
-dark. Move the payoff below the workspace. Await the Run/Stop product decision;
-no runtime/mailbox/ACK protocol change is needed for these UI refinements.
+dark. Move the payoff below the workspace. Approved #27 adds one state-dependent
+execution button with a cancellable300ms reveal timer, immediate Stop during input
+wait and persistent Stop after resumption. Do not delay actual Stop or change the
+runtime/mailbox/ACK protocol. Loading/Stopping are disabled; failure offers Retry.
