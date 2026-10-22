@@ -1,12 +1,17 @@
-export function createTheme(group) {
+export function createTheme(button) {
   const media = matchMedia('(prefers-color-scheme: dark)');
-  const buttons = [...group.querySelectorAll('[data-theme-choice]')];
+  const choices = ['system', 'light', 'dark'];
   let choice = 'system';
   function update() {
     document.documentElement.dataset.theme = choice === 'system' ? (media.matches ? 'dark' : 'light') : choice;
-    for (const button of buttons) button.setAttribute('aria-pressed', String(button.dataset.themeChoice === choice));
+    button.dataset.themeChoice = choice;
+    const next = choices[(choices.indexOf(choice) + 1) % choices.length];
+    const description = `${choice[0].toUpperCase() + choice.slice(1)} appearance. Switch to ${next} appearance`;
+    button.setAttribute('aria-label', description);
+    button.title = description;
+    for (const icon of button.querySelectorAll('[data-theme-icon]')) icon.toggleAttribute('hidden', icon.dataset.themeIcon !== choice);
   }
   media.addEventListener('change', update);
-  for (const button of buttons) button.addEventListener('click', () => { choice = button.dataset.themeChoice; update(); });
+  button.addEventListener('click', () => { choice = choices[(choices.indexOf(choice) + 1) % choices.length]; update(); });
   update();
 }

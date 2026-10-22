@@ -9,14 +9,14 @@
 <body>
   <header class="app-header">
     <div class="brand"><span class="brand-mark" aria-hidden="true">k.</span><div><h1>Klode</h1><p>A little room for Python.</p></div></div>
-    <div id="theme" class="theme-control" role="group" aria-label="Appearance">
-      <button type="button" data-theme-choice="system" aria-label="System appearance" title="System appearance" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16Z" fill="currentColor" stroke="none"/></svg></button>
-      <button type="button" data-theme-choice="light" aria-label="Light appearance" title="Light appearance" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg></button>
-      <button type="button" data-theme-choice="dark" aria-label="Dark appearance" title="Dark appearance" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 15A8.5 8.5 0 0 1 9 4a8.5 8.5 0 1 0 11 11Z"/></svg></button>
-    </div>
+    <button id="theme" class="theme-control" type="button" data-theme-choice="system" aria-label="System appearance. Switch to light appearance" title="System appearance. Switch to light appearance">
+      <svg data-theme-icon="system" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16Z" fill="currentColor" stroke="none"/></svg>
+      <svg data-theme-icon="light" viewBox="0 0 24 24" aria-hidden="true" hidden><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg>
+      <svg data-theme-icon="dark" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M20 15A8.5 8.5 0 0 1 9 4a8.5 8.5 0 1 0 11 11Z"/></svg>
+    </button>
   </header>
   <main>
-    <div class="workspace-heading"><p class="eyebrow">PYTHON WORKSPACE</p><p class="workspace-motto">One file. One idea at a time.</p></div>
+    <div class="workspace-heading"><p class="eyebrow">PYTHON WORKSPACE</p></div>
     <div class="workspace">
       <section class="panel editor-panel" aria-labelledby="filename">
         <div class="panel-header"><h2 id="filename"><span class="file-dot" aria-hidden="true"></span>main.py</h2><div class="run-actions"><button id="stop" type="button" disabled>Stop</button><button id="run" class="primary" type="button" disabled><span aria-hidden="true">▶</span> Run code</button></div></div>
@@ -24,10 +24,10 @@
       </section>
       <section class="panel console-panel" aria-labelledby="console-title">
         <div class="panel-header"><h2 id="console-title">Console</h2><span id="status" role="status" data-state="loading">Loading Python…</span></div>
-        <div class="console-body"><p id="output-placeholder">Run your code to see the result here.</p><div id="transcript"><span id="output" tabindex="0" role="textbox" aria-readonly="true" aria-multiline="true" aria-label="Program output"></span><form id="input-form" hidden><label class="visually-hidden" for="answer">Program input</label><input id="answer" type="text" autocomplete="off" spellcheck="false" aria-describedby="input-help"><button id="submit" type="submit" aria-label="Send input" title="Send input">↵</button></form></div><p id="input-help" class="visually-hidden">Enter one line, then press Enter. An empty answer is allowed.</p><pre id="error" role="alert" hidden></pre></div>
+        <div class="console-body"><p id="output-placeholder">Run your code to see the result here.</p><div id="transcript"><span id="output" tabindex="0" role="textbox" aria-readonly="true" aria-multiline="true" aria-label="Program output"></span><form id="input-form" hidden><label class="visually-hidden" for="answer">Program input</label><input id="answer" type="text" autocomplete="off" spellcheck="false" aria-describedby="input-help"></form></div><p id="input-help" class="visually-hidden">Enter one line, then press Enter. An empty answer is allowed.</p><pre id="error" role="alert" hidden></pre></div>
       </section>
     </div>
-
+    <p class="workspace-motto">One file. One idea at a time.</p>
   </main>
   <footer class="app-footer"><a href="https://github.com/hanze-hbo-ict/klode">Klode on GitHub</a><span>No code completion or AI assistance</span></footer>
   <script type="module" src="/src/main.js"></script>
