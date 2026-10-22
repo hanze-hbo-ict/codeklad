@@ -63,17 +63,17 @@ includes unwanted assistance.
 Sources: [Vite](https://vite.dev/guide/),
 [CodeMirror setup source](https://raw.githubusercontent.com/codemirror/basic-setup/main/src/codemirror.ts).
 
-## Reload recovery and Python scope
+## Source lifecycle and Python scope
 
-Decision: save editor changes to sessionStorage with a versioned key, restore even
-an empty string, and keep the editor document independent from worker lifetimes.
-No cross-session persistence or stored input/output is required. Report storage
-failure, preserving editing rather than silently promising reload recovery.
+Feedback #20 supersedes the original sessionStorage recovery decision. Keep the
+editor document independent from worker lifetimes but do not save/restore source
+through application storage; ignore existing values and initialise normal content
+on reload. No storage warning or alternative persistence mechanism is required.
+Historical recovery results apply only to their recorded implementation commits.
 The runtime-supported standard library is the first-version scope. Explicitly
 document browser-runtime limits; do not promise desktop CPython module parity.
 No extra packages, file-import/export workflows or graphics.
-Sources: [sessionStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage),
-[Pyodide constraints](https://pyodide.org/en/stable/usage/wasm-constraints.html).
+Sources: [Pyodide constraints](https://pyodide.org/en/stable/usage/wasm-constraints.html).
 
 ## Research outcome
 

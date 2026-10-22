@@ -1,8 +1,9 @@
 # Tasks: Klode minimal Python editor
 
 **Input**: spec.md, plan.md, research.md, data-model.md, contracts/ui-runtime.md.
-**Status**: Proposed decomposition for #3; not an instruction to implement before
-human scope/merge approval. GitHub issues remain authoritative for work status.
+**Status**: Original decomposition plus approved feedback #19–#24. Original completed
+tasks record historical implementation, including superseded recovery work; they
+do not assert current requirements. GitHub issues remain authoritative for status.
 **Validation**: Each story includes acceptance evidence; no blanket TDD requirement.
 
 ## Phase 1: Setup
@@ -40,14 +41,15 @@ Independent validation: two prompts, delayed/empty/Unicode answers, Stop during 
 - [X] T012 [US2] Implement labelled pending-input controls in src/input.js; preserve empty lines, encode Unicode as UTF-8, reject oversize lines visibly without truncation and prevent stale submissions.
 - [X] T013 [US2] Integrate waiting/submission/cancellation states in src/main.js and record repeated/empty/Unicode/no-newline/oversize/stop/rerun cases in specs/001-python-editor/evidence/acceptance.md.
 
-## Phase 5: US3 — Exam transfer and reload recovery (P1)
+## Phase 5: US3 — Exam transfer (P1)
 
-Goal: use the approved laptop route, copy exact source into ans.app and restore on reload.
-Independent validation: multiline clipboard comparison and nonempty/empty reload cases.
+Goal: use the approved laptop route and copy exact source into ans.app.
+Independent validation: multiline clipboard comparison. T014/T015 are historical
+recovery implementation superseded by feedback #20/T024 below.
 
 - [X] T014 [US3] Implement src/session.js with a versioned sessionStorage key; 'source is a Unicode string and may be empty', absence differs from empty, storage failures are visible, and stdin/output are not persisted.
 - [X] T015 [US3] Connect session saves/restoration in src/main.js without losing code on Stop/restart; document unavailable-storage behaviour in specs/001-python-editor/evidence/acceptance.md.
-- [ ] T016 [US3] Validate native multiline copy/paste into ans.app and exact same-session reload recovery on the exam laptop; record expected/actual text, browser, whitelist and commit in specs/001-python-editor/evidence/acceptance.md.
+- [ ] T016 [US3] Validate native multiline copy/paste into ans.app on the exam laptop; record expected/actual text, browser, whitelist and commit in specs/001-python-editor/evidence/acceptance.md.
 
 ## Phase 6: US4 — Responsive display and themes (P2)
 
@@ -79,8 +81,8 @@ that dependency rather than claiming the school-environment gate passed.
 
 US1: editor and runtime work can be delegated to separate branches after exact
 message fields are agreed; UI integration is sequential. US2: mailbox and page
-controls have distinct files but require a frozen contract first. US3: session
-helper can be prepared separately; main.js integration and evidence are sequential.
+controls have distinct files but require a frozen contract first. US3: native-copy validation can be prepared separately; main.js integration and
+evidence are sequential.
 US4: T017 and T018 may run in parallel; T019 integrates them. Never edit the shared
 main.js or acceptance evidence concurrently. Marked [P] tasks have disjoint files.
 
@@ -93,3 +95,18 @@ spec commit, allowed files/scope, prerequisites, criteria, role, deliverable and
 conditions from this plan. Use an isolated branch/worktree, independent reviewer and
 human merge gate for every issue. Do not turn task checkboxes into a competing status
 system or change product criteria during implementation.
+
+## Phase 8: Feedback round 1 (#19–#24)
+
+- [ ] T023 Review revised product/spec/plan/contracts before dependent implementation; record reviewed spec commit at #19/#20.
+- [ ] T024 [#20] Remove application source save/restore, storage warning and ans-specific UI instructions. Preserve current edits during execution/Stop/theme and exact native copy; verify initial content on reload with empty/nonempty edits and old stored values. Replace recovery assertions in current tests/docs; retain historical evidence for original commits.
+- [ ] T025 [#21] Integrate labelled input at the console prompt with safe read-only selectable history, accepted-only echo/newline before later output, internal reveal/focus and unchanged mailbox/ACK/Stop semantics. Cover exact example, empty/Unicode/repeated/no-newline, rejection/duplicate/stale/Stop/rerun and lossless output/flood cases.
+- [ ] T026 [#22] Move Run/Stop to upper editor header; coordinate DOM/CSS sequentially with T025. Add padded rounded unclipped accessible editor/console focus. Verify light/dark at 1280×720/360×640, long content and pending input without horizontal overflow.
+- [ ] T027 [#23] Replace dropdown with accessible local system/light/dark icons; simplify footer, keep approved copy/taglines, add repository link, remove hardcoded version/browser copy. Verify selected state, keyboard/focus and source/runtime/transcript preservation.
+- [ ] T028 [#24] Publish-facing README plus CONTRIBUTING linking existing governance, honest live/planned features and browser limits, local quickstart and human/agent workflow. Keep broad translation under #8.
+- [ ] T029 Independently review feedback diff and relevant build/browser results; report issue-specific outcomes and remaining actual-school gate. Prepare PR for human merge decision; no autonomous merge/publication.
+
+T023 precedes T024–T028. T025/T026 share console/header/focus interfaces and must
+be integrated sequentially or have explicit disjoint ownership. T027 may not edit
+their shared files concurrently. T028 follows the revised agreed behaviour and
+distinguishes pending changes from live deployment. T029 follows relevant checks.

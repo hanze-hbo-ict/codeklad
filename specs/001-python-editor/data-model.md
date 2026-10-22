@@ -3,9 +3,9 @@
 ## Program document
 
 Fields: filename is exactly `main.py`; source is a Unicode string and may be
-empty. The editor owns it independently of runtime resets. Save after document
-changes and restore from a versioned sessionStorage key. Absence differs from an
-empty string; storage failures are visible. Do not persist stdin or output.
+empty. The editor owns it independently of runtime resets and executed snapshots.
+Do not save/restore it through application storage; reload starts normal initial
+content and ignores old stored source. Do not persist stdin or output.
 
 ## Runtime and execution
 
@@ -27,7 +27,9 @@ length; publish the ready state atomically only after bytes and length are writt
 
 Ordered stdout/stderr chunks belong to a run ID. Render as text, including prompts
 without trailing newlines. Do not interpolate Python output as HTML. Completion
-and error events end an execution and release pending input state.
+and error events end an execution and release pending input state. Accepted input
+lines join the transcript once, with a newline before subsequent worker output;
+rejected/stale/duplicate answers do not. Only the current pending input is editable.
 
 ## Theme
 

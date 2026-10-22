@@ -3,10 +3,12 @@
 ## User interaction
 
 One editor labelled main.py, Run and Stop, output/error region, a labelled
-line-input control when Python requests input, and system/light/dark themes.
+line-input control within the console at its prompt when Python requests input,
+and accessible system/light/dark icon controls. Run/Stop are in the upper editor header.
 No completion UI, AI, package-install controls, file manager or graphics panel.
-Allow normal select/copy shortcuts without rewriting selected code. Preserve code
-on reload in the same session; warn if browser storage prevents that guarantee.
+Allow normal select/copy shortcuts without rewriting selected code. Do not save or
+restore source through application-managed storage; reload starts initial content.
+Keep current edits independent of execution/reset/theme; omit recovery warnings.
 
 ## Messages
 
@@ -67,9 +69,9 @@ waiting-for-input, stopping, failed. The visible labels are plain English.
 `#run` is enabled only when ready; `#stop` resets the runtime (Retry after failure).
 Editor source lives independently and survives runtime termination.
 
-Session storage key `klode.source.v1` holds source only. A missing key uses the
-initial example; an empty value restores an empty editor. Every document change
-saves synchronously; storage failures warn without disabling editing/execution.
+Feedback #20 supersedes the original source-storage contract: do not read or write
+`klode.source.v1` or an alternative source persistence store. Existing values are
+ignored. Source remains in the current document until navigation/reload.
 Theme selection is in-memory only; System also reacts to live OS preference changes.
 
 Output uses a separate one-word shared acknowledgement buffer. The worker groups
@@ -79,4 +81,22 @@ chunk; the page appends at an animation frame and acknowledges atomically. This
 backpressure keeps Stop reachable during endless printing without discarding or
 capping output. Pending output flushes before input, completion and failure.
 The isolated technical spike omits output acknowledgement; the application enables
-it. Output is a read-only native text control, retaining exact safe plain text.
+it. Feedback #21 supersedes the native-textarea-only presentation: the prior
+transcript remains safe read-only plain text, with an editable labelled active input
+within the console beside its current prompt. Preserve transcript selection/copy.
+
+## Accepted input echo and presentation (#21–#23)
+
+Validate active run/request identity and capacity before recording an answer. A
+successfully accepted line is echoed exactly once with a visual newline before any
+subsequent worker output. Python receives normal line-input content, without the
+prompt or an extra duplicated newline. Empty input still records a line break.
+Oversize, duplicate, cancelled or stale submissions do not enter accepted history.
+Stop invalidates active input; prior-run events cannot reach a new transcript.
+
+Focus/reveal the pending input by scrolling the console, without forcing the page
+to its bottom. Past output is never editable or rendered as HTML. The actual DOM
+may change; input/output/mailbox wire semantics above remain unchanged. Preserve
+lossless finite output and responsive Stop under flood/backpressure. Focus outlines
+are padded/rounded and visible in both themes without clipping at editor gutters.
+Theme controls expose accessible names, selected state and keyboard interaction.
