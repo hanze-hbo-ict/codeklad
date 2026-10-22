@@ -13,7 +13,7 @@ export function createOutput(output, error, placeholder) {
     clear() { chunks = []; if (frame !== null) cancelAnimationFrame(frame); frame = null; output.textContent = ''; showError(''); placeholder.hidden = false; },
     append(text) { chunks.push(text); if (frame === null) frame = requestAnimationFrame(flush); },
     flush,
-    reveal() { flush(); output.scrollTop = output.scrollHeight; },
+    reveal() { flush(); const container = output.closest('.console-body'); container.scrollTop = container.scrollHeight; },
     error: showError,
   };
 }
