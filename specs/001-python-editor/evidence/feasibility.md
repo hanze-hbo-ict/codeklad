@@ -87,3 +87,18 @@ Implementation checked against official
 [Pyodide 314.0.7 streams](https://pyodide.org/en/314.0.7/usage/streams.html),
 [deployment](https://pyodide.org/en/314.0.7/usage/downloading-and-deploying.html)
 and [Vite configuration](https://vite.dev/config/server-options.html).
+
+## Product-owner continuation decision — 2026-10-22
+
+The product owner reports the LAN HTTPS input spike works in their libvirt
+Windows VM using Edge, and explicitly authorises continuing with the editor.
+This is user-reported VM smoke evidence; exact OS/browser versions and per-case
+results were not supplied. It is not a passed school-laptop whitelist test.
+
+On this basis, local UI/runtime implementation may proceed before the remaining
+school-environment evidence. The actual Windows school whitelist, opening route,
+reference exercise, cold loading and ans.app clipboard checks remain mandatory
+before claiming exam suitability or releasing for exam use. T005–T006, T016 and
+T021 remain incomplete until that evidence is collected/reviewed. This decision
+supersedes the earlier implementation stop on unavailable school-device access;
+it does not weaken the product requirements or authorise production deployment.

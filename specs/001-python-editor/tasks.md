@@ -13,7 +13,9 @@ human scope/merge approval. GitHub issues remain authoritative for work status.
 
 ## Phase 2: Foundation and feasibility gate
 
-No full user-story implementation begins until this evidence gate passes.
+The 2026-10-22 product-owner continuation decision in spec.md/plan.md permits
+local user-story implementation after the successful user-reported Windows VM
+smoke test. School-environment evidence remains a release/acceptance gate.
 
 - [X] T004 Build an isolated minimal stdin/shared-memory spike in experiments/input-spike/ using a module worker and page input field; prove repeated, empty and Unicode answers with visible prompts, Stop/restart and no main-thread blocking.
 - [ ] T005 Record actual browser/version, opening route, whitelist, agreed reference exercise with expected results, candidate HTTPS host/header capability and cold-cache origin audit in specs/001-python-editor/evidence/feasibility.md; coordinate approved candidate provisioning with #4 and run the spike on the exam laptop.
@@ -64,12 +66,14 @@ Independent validation: system/light/dark at 360 and 1280 CSS pixels without sou
 
 ## Dependencies and execution order
 
-T001 → T002/T003 → T004 → T005 → T006 is the blocking feasibility chain.
-US1 (T007–T010) follows that gate; US2 (T011–T013) follows US1 runtime integration.
+Original feasibility chain: T001 → T002/T003 → T004 → T005 → T006.
+The documented product-owner continuation decision allows T007 onward locally
+after T004 and the reported VM smoke test; T005/T006 remain open for exam acceptance.
+US1 (T007–T010) follows the locally proven runtime and continuation decision; US2 (T011–T013) follows US1 runtime integration.
 US3 (T014–T016) follows the editor/runtime and input workflows. US4 (T017–T019)
 follows the working P1 UI, then T020–T022 validate the complete feature.
 T005 may require school access/whitelisting and a separately approved host; report
-that dependency rather than claiming the gate passed or starting full UI work.
+that dependency rather than claiming the school-environment gate passed.
 
 ## Parallel opportunities by story
 

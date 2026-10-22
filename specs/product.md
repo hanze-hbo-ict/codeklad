@@ -38,8 +38,9 @@ A URL whitelist is restricted connectivity, not a requirement for fully offline 
 
 ## Remaining questions
 
-- Exact Windows browser/version, opening route (tab/window/embed) and an exam
-  reference exercise; these are needed for the actual-environment test.
+- Microsoft Edge is the confirmed Windows browser; opening in a new window is
+  provisional. Exact versions, actual opening route and reference exercise remain
+  prerequisites for the school-environment test.
 - Preference persistence is not required by the current scope.
 - Exact whitelisted URL/origin and hosting response-header capabilities.
 
@@ -52,3 +53,8 @@ without extra packages/files/graphics, syntax highlighting and indentation witho
 completion, and same-session reload recovery. These decisions are recorded under issue #3. The physical repository
 and local directory still use `codeklad` while the rename is prepared separately;
 existing URLs and identifiers remain valid during review.
+
+The product owner subsequently reported the local libvirt Windows/Edge HTTPS
+spike works and authorised editor implementation to continue. This permits local
+implementation while preserving actual school-whitelist evidence as an acceptance
+and exam-use release gate; see the dated continuation decision in the feature spec.
