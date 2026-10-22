@@ -22,7 +22,13 @@ try {
   const page = await context.newPage(); page.on('pageerror', (error) => errors.push(String(error)));
   const state = (value) => page.waitForFunction((v) => document.querySelector('#status').dataset.state === v, value, { timeout: 30000 });
   const editor = page.locator('.cm-content');
-  const source = () => page.locator('.cm-line').allTextContents().then((lines) => lines.join('\n'));
+  // CodeMirror virtualises lines; inspect the actual source through native copy,
+  // rather than assuming every line is currently represented in the DOM.
+  async function source() {
+    await editor.focus(); await page.keyboard.press('ControlOrMeta+a'); await page.keyboard.press('ControlOrMeta+c');
+    const text = await page.evaluate(() => navigator.clipboard.readText());
+    await page.keyboard.press('ArrowRight'); return text;
+  }
   const theme = (mode) => page.locator(`[data-theme-choice="${mode}"]`).click();
   async function edit(text) {
     await editor.click(); await page.keyboard.press('ControlOrMeta+a');
