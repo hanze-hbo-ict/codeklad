@@ -64,7 +64,7 @@ specs/001-python-editor/
   evidence/feasibility.md, evidence/acceptance.md  # local/actual results kept separate
 index.html
 src/
-  main.js, editor.js, output.js, input.js, theme.js, styles.css
+  main.js, editor.js, output.js, input.js, execution.js, theme.js, styles.css
   runtime/client.js, runtime/worker.js, runtime/input-mailbox.js
 public/runtime/<pinned-version>/
 scripts/vendor-runtime.mjs
@@ -121,6 +121,6 @@ terminal-like: transparent undecorated input, native caret and Enter submission
 without a separate send button. Retain console focus indication and labels.
 Replace the theme group with one current-mode icon button cycling system, light,
 dark. Move the payoff below the workspace. Approved #27 adds one state-dependent
-execution button with a cancellable300ms reveal timer, immediate Stop during input
+execution button with a cancellable 300 ms reveal timer, immediate Stop during input
 wait and persistent Stop after resumption. Do not delay actual Stop or change the
 runtime/mailbox/ACK protocol. Loading/Stopping are disabled; failure offers Retry.

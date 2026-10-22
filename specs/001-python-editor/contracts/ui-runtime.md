@@ -68,7 +68,7 @@ modules/builtins can persist until Stop. This is not a security sandbox.
 Application state is exposed in `#status[data-state]`: loading, ready, running,
 waiting-for-input, stopping, failed. The visible labels are plain English.
 `#run` is the single execution action. Ready offers Run code; an initial running
-state keeps it disabled for300ms, then offers Stop. Input wait offers Stop
+state keeps it disabled for 300 ms, then offers Stop. Input wait offers Stop
 immediately and input resumption retains Stop. Loading/Stopping are disabled,
 failed runtime availability offers Retry. Ordinary Python errors return to ready.
 Stop terminates/reinitialises the worker immediately; no idle reset action remains.
@@ -121,7 +121,7 @@ The console starts empty: omit the instructional “Run your code to see the res
 ## Single execution control and reveal timer (#27)
 
 One native button in a stable position/width dispatches the currently offered
-action. Ready→running starts one300ms Stop-reveal timer; ready/loading/stopping/
+action. Ready→running starts one 300 ms Stop-reveal timer; ready/loading/stopping/
 failed or a new run cancels/invalidates it. Short runs must not receive a late
 Stop label. Waiting-for-input bypasses the delay and keeps Stop enabled on
 subsequent running/input states. Stop clicks call termination immediately; there

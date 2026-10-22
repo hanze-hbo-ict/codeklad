@@ -77,7 +77,7 @@ the implementation. This section/task-status update is the orchestrator's report
 
 Local validation passes: six unit/runtime checks, production build, 18 application
 browser groups, seven isolated-spike groups, tooling metadata and whitespace.
-Browser: Chrome156.0.8078.47. At1280×720/360×640, the one native button displays only
+Browser: Chrome 156.0.8078.47. At1280×720/360×640, the one native button displays only
 the current mode's SVG, names current/next mode and cycles System→Light→Dark using
 click/Enter/Space. System following/manual overrides and current source remain
 intact. Input is transparent, borderless and without a Send button; native Enter
@@ -91,3 +91,38 @@ https://192.168.1.5:4444/ using the existing certificate and isolation headers.
 Run/Stop behaviour is deliberately unchanged; the open product decision is tracked
 separately in #27. Neither this review nor the preview authorises production merge
 or claims actual-school acceptance.
+
+## Single execution action acceptance (#27)
+
+The product owner approved one Run/Stop button in the same position and suggested
+a delay before showing Stop for short executions. Specification `83cdebd` was
+independently approved before implementation. Candidate `0816e9e` was independently
+approved with no findings; the reviewer independently passed all four new
+execution-controller tests, inspected the code/tests and mobile Stop appearance,
+and assessed the complete browser results. The orchestrator records this evidence
+and task status after that review.
+
+The sole 110 px native button offers Run code when ready, remains disabled during
+the first 300 ms of a run, then offers Stop if still running. Input wait shows Stop
+immediately and accepted input does not restart the delay. Loading/Stopping are
+disabled; runtime availability failure offers Retry. Ordinary Python errors return
+to Run code. Actual Stop is immediate; no execution time limit or idle Reset action
+was introduced. Runtime/mailbox/output ACK and documented cache semantics are
+unchanged. Pending timers are cancelled/versioned across completion/reset/failure
+and later runs. Browser timer calls use wrappers to preserve their native receiver.
+
+Validation: 10/10 unit/runtime checks, verified production build, 20 application
+browser groups and 7 isolated-spike groups pass in Chrome 156.0.8078.47. New
+deterministic tests cover short completion, queued stale callbacks/rapid rerun,
+input bypass/resumption, duplicate states and disabled/retry dispatch. Browser
+checks exercise native keyboard Run/Stop, stable width, Stop during input/loops/
+flood, actual worker-load failure followed by Retry and successful execution with
+edits preserved. Existing exact transcript/copy/no-storage/10000-line cases pass.
+Tooling metadata and diff checks pass. Visual light/dark 1280×720/360×640 checks
+confirm stable placement and preserved console presentation.
+
+The console's instructional placeholder was removed in `252a4f2`, independently
+reviewed; it starts empty. The current build is available on the existing LAN
+URL https://192.168.1.5:4444/. PR #25 remains subject to human merge approval;
+automatic Netlify previews and local Chrome results do not establish school
+Windows/Edge acceptance or authorise production release.

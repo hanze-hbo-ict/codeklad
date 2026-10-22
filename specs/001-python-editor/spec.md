@@ -274,7 +274,7 @@ under #27 replaces adjacent controls with the single button specified in FR-013.
 ## Run/Stop decision — 2026-10-22 (#27)
 
 The product owner approved one button on the same spot and requested delayed Stop
-appearance for short runs. Use an initial300ms presentation delay, with immediate
+appearance for short runs. Use an initial 300 ms presentation delay, with immediate
 Stop for input wait and no delay on the actual Stop action. Keep Run code disabled
 during that brief delay; console status already indicates Running. Retain Stop
 through input/resumption. Retry is for failed runtime availability; ordinary Python

@@ -124,6 +124,6 @@ Run/Stop is approved under #27; it is separate from completed #26 presentation w
 
 ## Phase 10: Single execution button (#27)
 
-- [ ] T034 Independently review the approved single-control/state/delay specification.
-- [ ] T035 Implement one stable native Run code/Stop/Retry button. Cancel/invalidate initial300ms reveal timers, reveal Stop immediately on input wait, preserve it through resumption and dispatch actual Stop immediately. Keep loading/stopping disabled, ordinary errors as Run code, no idle reset or lifecycle change.
-- [ ] T036 Verify deterministic timer/state boundaries and browser short/long/input/flood/Stop/retry/focus/source scenarios, obtain independent review and update PR25/local preview for the human merge decision.
+- [X] T034 Independently review the approved single-control/state/delay specification.
+- [X] T035 Implement one stable native Run code/Stop/Retry button. Cancel/invalidate initial 300 ms reveal timers, reveal Stop immediately on input wait, preserve it through resumption and dispatch actual Stop immediately. Keep loading/stopping disabled, ordinary errors as Run code, no idle reset or lifecycle change.
+- [X] T036 Verify deterministic timer/state boundaries and browser short/long/input/flood/Stop/retry/focus/source scenarios, obtain independent review and update PR25/local preview for the human merge decision.

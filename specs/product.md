@@ -91,7 +91,7 @@ icon visible. Return “One file. One idea at a time.” below the editor/worksp
 Pending console input uses the transcript font and native caret, without field
 decoration or a separate send button; Enter submits. Keep the input accessible
 and the surrounding console focus visible. The approved #27 interaction is one Run code/Stop/Retry button in the same
-position, with an initial300ms Stop appearance delay for short executions and
+position, with an initial 300 ms Stop appearance delay for short executions and
 immediate Stop on input wait. Actual Stop is immediate; there is no execution
 timeout or idle reset control. Loading/Stopping disable the button; ordinary
 Python errors return to Run code rather than Retry.
