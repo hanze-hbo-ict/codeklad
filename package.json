@@ -14,10 +14,12 @@
     "dev": "vite --host 127.0.0.1",
     "build": "npm run vendor:runtime && vite build",
     "preview": "vite preview --host 127.0.0.1",
-    "test": "node --test experiments/input-spike/mailbox.test.mjs",
-    "test:browser": "node experiments/input-spike/browser.test.mjs"
+    "test": "node --test experiments/input-spike/mailbox.test.mjs experiments/input-spike/session.test.mjs",
+    "test:browser": "node experiments/input-spike/app.browser.test.mjs && npm run test:browser:spike",
+    "test:browser:spike": "node experiments/input-spike/browser.test.mjs"
   },
   "dependencies": {
+    "@codemirror/commands": "6.11.1",
     "@codemirror/lang-python": "6.2.1",
     "@codemirror/language": "6.13.1",
     "@codemirror/state": "6.7.6",

@@ -1,0 +1,23 @@
+import { EditorState } from '@codemirror/state';
+import { EditorView, keymap, lineNumbers, highlightActiveLine, highlightActiveLineGutter, drawSelection } from '@codemirror/view';
+import { pythonLanguage } from '@codemirror/lang-python';
+import { syntaxHighlighting, defaultHighlightStyle, HighlightStyle, indentOnInput, indentUnit } from '@codemirror/language';
+import { defaultKeymap, history, historyKeymap } from '@codemirror/commands';
+
+const palette = { '#404740': 'var(--muted)', '#708': 'var(--syntax-keyword)', '#219': 'var(--syntax-number)', '#164': 'var(--syntax-name)', '#a11': 'var(--syntax-string)', '#e40': 'var(--syntax-number)', '#00f': 'var(--syntax-name)', '#30a': 'var(--syntax-name)', '#085': 'var(--syntax-name)', '#167': 'var(--syntax-name)', '#256': 'var(--syntax-name)', '#00c': 'var(--syntax-name)', '#940': 'var(--muted)', '#f00': 'var(--error)' };
+const highlighting = HighlightStyle.define(defaultHighlightStyle.specs.map((spec) => ({ ...spec, ...(spec.color ? { color: palette[spec.color] } : {}) })));
+export function createEditor(parent, source, onChange) {
+  // Use only the language parser, not python()'s completion-support extension.
+  // Tab retains browser focus navigation. Enter uses the default indent command.
+  const view = new EditorView({
+    parent,
+    state: EditorState.create({ doc: source, extensions: [
+      pythonLanguage, syntaxHighlighting(highlighting), indentOnInput(), indentUnit.of('    '),
+      lineNumbers(), highlightActiveLineGutter(), highlightActiveLine(), drawSelection(), history(),
+      keymap.of([...defaultKeymap, ...historyKeymap]),
+      EditorView.contentAttributes.of({ 'aria-label': 'main.py Python source', spellcheck: 'false', autocorrect: 'off', autocapitalize: 'off' }),
+      EditorView.updateListener.of((update) => { if (update.docChanged) onChange(update.state.doc.toString()); }),
+    ] }),
+  });
+  return { source: () => view.state.doc.toString(), focus: () => view.focus() };
+}

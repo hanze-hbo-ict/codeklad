@@ -77,7 +77,8 @@ Still needed:
 - Independent review against the gate (T006).
 
 Local localhost headers and local browser success cannot substitute for those
-checks. Stop here before implementing T007 onward. No production/exam suitability
+checks. The continuation decision below permits local T007 onward work;
+school-environment evidence remains open. No production/exam suitability
 is claimed. Runtime-supported stdlib excludes desktop-only/process/socket modules
 and unavailable packages; no extra packages, user files or graphics are provided.
 

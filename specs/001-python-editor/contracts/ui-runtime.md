@@ -41,3 +41,42 @@ Support the chosen runtime's standard library; document unsupported desktop-only
 modules. Do not automatically fetch packages based on imports. A module unavailable
 in the bundled runtime produces an ordinary Python error. User files and graphics
 are outside this version's workflows, rather than a claim of a security sandbox.
+
+## Implemented local contract — issue #15
+
+The product editor and isolated spike now share `src/runtime/worker.js` and
+`src/runtime/input-mailbox.js`. The page-side runtime client enforces one active
+run and filters worker-generation/run identity. Wire fields:
+
+- Page → worker: `initialise {runtimeURL, mailbox, outputSignal}`, `run {runId, source}`.
+- Worker → page: `ready {runId:0, isolated, version}`, `output {runId, channel,
+  text, outputId}`, `input-request {runId, requestId}`, `completed {runId}`,
+  `failed {runId, error}`.
+
+The mailbox has four Int32 words (state, run ID, request ID, byte length) followed
+by exactly 65,536 UTF-8 payload bytes. State 0 means waiting, state 1 answer.
+Oversize or multiline submissions are rejected visibly; empty lines are accepted.
+Bytes and length precede atomic state publication/notification. The worker checks
+identity/state/length, copies the shared payload before browser TextDecoder use,
+and supplies a newline explicitly. Stop invalidates the generation and creates
+an entirely new worker/mailbox. Normal reruns use fresh globals, while imported
+modules/builtins can persist until Stop. This is not a security sandbox.
+
+Application state is exposed in `#status[data-state]`: loading, ready, running,
+waiting-for-input, stopping, failed. The visible labels are plain English.
+`#run` is enabled only when ready; `#stop` resets the runtime (Retry after failure).
+Editor source lives independently and survives runtime termination.
+
+Session storage key `klode.source.v1` holds source only. A missing key uses the
+initial example; an empty value restores an empty editor. Every document change
+saves synchronously; storage failures warn without disabling editing/execution.
+Theme selection is in-memory only; System also reacts to live OS preference changes.
+
+Output uses a separate one-word shared acknowledgement buffer. The worker groups
+writes and emits ordered chunks of at most 8,192 UTF-16 code units, preserving
+surrogate pairs. It waits for page acknowledgement before producing the next
+chunk; the page appends at an animation frame and acknowledges atomically. This
+backpressure keeps Stop reachable during endless printing without discarding or
+capping output. Pending output flushes before input, completion and failure.
+The isolated technical spike omits output acknowledgement; the application enables
+it. Output is a read-only native text control, retaining exact safe plain text.

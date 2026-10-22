@@ -29,3 +29,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
+
+## Browser editor dependencies
+
+The CodeMirror/Lezer editor and supporting libraries are distributed under MIT
+licenses. Exact locked versions, source repositories and original copyright and
+license texts are retained in [public/editor-licenses.txt](public/editor-licenses.txt),
+which Vite also copies into the static build. Runtime licenses remain in
+[public/runtime/NOTICE.md](public/runtime/NOTICE.md).

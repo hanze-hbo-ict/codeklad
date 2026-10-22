@@ -3,12 +3,13 @@
 **Feature Branch**: `001-python-editor`
 **Created**: 2026-10-21
 **Updated**: 2026-10-22
-**Status**: Proposed baseline; product scope clarified, technical plan ready for review.
+**Status**: Approved scope with local implementation under review (#15); actual school
+acceptance and release pending.
 **Input**: Product-owner discussion, issue #3, `specs/product.md`, constitution
 v1.0.1; merged product-name base `bb356fc`.
 
-Klode is the product name selected on 2026-10-22. Concrete error-handling and
-acceptance proposals below remain subject to the human product owner's review.
+Klode is the product name selected on 2026-10-22. The scope and plan
+were approved before implementation; acceptance evidence remains subject to review.
 
 ## Clarifications
 
@@ -100,7 +101,7 @@ As a student, I want a responsive interface with system, light and dark themes.
 
 ### Edge Cases
 
-Proposed error handling, to be confirmed in review:
+Agreed error handling:
 
 - Invalid code shows an error and remains editable.
 - Runtime loading failures produce a readable error state.
@@ -154,7 +155,7 @@ return to the product owner instead of weakening interactive input or the whitel
 
 ### Measurable Outcomes
 
-Concrete acceptance proposals for review:
+Acceptance criteria:
 
 - **SC-001**: `print(2 + 3)` produces `5`; editing and running again works.
 - **SC-002**: A syntax error is displayed and the corrected code runs in the same editor.
@@ -188,9 +189,9 @@ reported separately from actual exam-laptop evidence.
 
 ## Next steps and stop conditions
 
-Review this specification and its implementation plan/tasks. Begin with the
-feasibility gate before implementing the full editor. Do not claim actual exam
-compatibility until the Windows/whitelist cases pass, and do not publish before
+The local runtime spike is implemented and the continuation decision below
+authorises local editor work. Complete the remaining school-environment gate.
+Do not claim actual exam compatibility until the Windows/whitelist cases pass, and do not publish before
 the human merge gate and release checks. Escalate restrictions that require scope
 or criteria changes to the product owner.
 

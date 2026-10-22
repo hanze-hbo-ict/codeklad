@@ -1,6 +1,7 @@
 # Product specification — draft
 
-Status: agreed product direction and remaining questions; no implemented application.
+Status: agreed product scope; local first-version implementation under review (#15).
+Actual school-environment acceptance and release remain pending.
 Product name: **Klode**, selected by the product owner on 2026-10-22 (formerly Codeklad).
 
 ## Goal
