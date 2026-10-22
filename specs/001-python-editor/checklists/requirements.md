@@ -1,33 +1,34 @@
-# Specification Quality Checklist: minimale Python-editor
+# Specification Quality Checklist: minimal Python editor
 
-**Purpose**: Gereedheid voor technische planning.
-**Created**: 2026-10-21
+**Purpose**: Assess readiness for technical planning.
+**Updated**: 2026-10-22
 **Feature**: [spec.md](../spec.md)
 
-## Content Quality
+## Content quality
 
-- [x] Gebruikersdoel en prioriteiten zijn beschreven.
-- [x] Vereisten leggen geen technische implementatie vast.
-- [x] Alle verplichte templatesecties zijn ingevuld.
-- [x] Technische voorstellen zijn herkenbaar als onderzoeksrichting.
+- [x] User goals and priorities are stated.
+- [x] Requirements do not prescribe implementation technologies.
+- [x] Required template sections are present.
+- [x] Confirmed 2026-10-22 decisions are distinguished from proposals.
 
-## Requirement Completeness
+## Requirement completeness
 
-- [ ] Q1–Q3 zijn beantwoord; geen NEEDS CLARIFICATION-markers blijven open.
-- [ ] Invoer, Python-mogelijkheden en codelevensloop zijn toetsbaar afgebakend.
-- [x] Voorlopige succescriteria zijn meetbaar en beschrijven gebruikersresultaten.
-- [ ] Toetsomgeving en referentieopgave zijn bevestigd.
-- [x] Edge cases en afhankelijkheden zijn benoemd.
-- [x] Scopegrenzen en menselijke besluitvorming zijn expliciet.
+- [x] Interactive input, copy/paste to ans.app and no cross-session persistence requirement are recorded.
+- [x] The Windows exam laptop and URL whitelist constraints are recorded.
+- [ ] Remaining Q1–Q3 questions are resolved.
+- [ ] Python capabilities and editor assistance are fully bounded.
+- [ ] Browser/version, opening route, whitelist and reference exercise are confirmed.
+- [x] Proposed outcomes are measurable and user-focused.
+- [x] Edge cases, dependencies and scope boundaries are explicit.
 
-## Feature Readiness
+## Readiness
 
-- [ ] De product owner heeft de voorgestelde acceptatiecriteria bevestigd.
-- [ ] Alle gebruikersscenario's hebben volledig uitvoerbare acceptatiegevallen.
-- [ ] De spec is gereed voor speckit-plan.
+- [ ] The product owner has confirmed the concrete acceptance proposals.
+- [ ] Every acceptance scenario is executable against a confirmed environment.
+- [ ] The specification is ready for final implementation planning.
 
 ## Notes
 
-Eerste zelfcontrole door speckit-specify, geen onafhankelijke review of
-implementatiebewijs. Q1–Q3 blokkeren definitieve planning. Er zijn geen
-extension hooks geconfigureerd. Open productkeuzes zijn niet ingevuld als besluit.
+This is a specification self-check, not independent acceptance evidence.
+Cross-session persistence is decided; same-session reload recovery is not.
+No extension hooks are configured. Implementation and publication remain outside scope.
