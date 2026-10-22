@@ -3,16 +3,13 @@ import { spawn } from 'node:child_process';
 import { createServer } from 'node:http';
 import { readFile } from 'node:fs/promises';
 import { chromium } from 'playwright-core';
+import { waitForPreview } from './preview-ready.mjs';
 const port = 4275, origin = `http://127.0.0.1:${port}`;
 const preview = spawn(process.execPath, ['node_modules/vite/bin/vite.js', 'preview', '--host', '127.0.0.1', '--port', String(port)], { stdio: 'pipe' });
 let browser, negative;
 const passed = [];
 try {
-  await new Promise((resolve, reject) => {
-    const timeout = setTimeout(() => reject(new Error('Preview startup timed out')), 15000);
-    preview.stdout.on('data', (chunk) => { if (String(chunk).includes(origin)) { clearTimeout(timeout); resolve(); } });
-    preview.once('exit', (code) => { clearTimeout(timeout); reject(new Error(`Preview exited ${code}`)); });
-  });
+  await waitForPreview(preview, `${origin}/`);
   browser = await chromium.launch({ executablePath: process.env.CHROME_BIN || '/opt/google/chrome/chrome', headless: true,
     args: process.getuid?.() === 0 ? ['--no-sandbox'] : [] });
   const context = await browser.newContext({ serviceWorkers: 'block', permissions: ['clipboard-read', 'clipboard-write'], viewport: { width: 1280, height: 900 } });
