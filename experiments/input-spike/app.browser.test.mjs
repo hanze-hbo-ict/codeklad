@@ -29,14 +29,20 @@ try {
     const text = await page.evaluate(() => navigator.clipboard.readText());
     await page.keyboard.press('ArrowRight'); return text;
   }
-  const theme = (mode) => page.locator(`[data-theme-choice="${mode}"]`).click();
+  async function theme(mode) {
+    for (let step = 0; step < 3; step++) {
+      if (await page.locator('#theme').getAttribute('data-theme-choice') === mode) return;
+      await page.locator('#theme').click();
+    }
+    assert.equal(await page.locator('#theme').getAttribute('data-theme-choice'), mode);
+  }
   async function edit(text) {
     await editor.click(); await page.keyboard.press('ControlOrMeta+a');
     if (text) await page.keyboard.insertText(text); else await page.keyboard.press('Backspace');
     assert.equal(await source(), text);
   }
   async function run(text) { await edit(text); await page.locator('#run').click(); }
-  async function answer(text) { await state('waiting-for-input'); await page.locator('#answer').fill(text); await page.locator('#submit').click(); }
+  async function answer(text) { await state('waiting-for-input'); await page.locator('#answer').fill(text); await page.locator('#answer').press('Enter'); }
   await page.goto(origin); await state('ready');
   const initialSource = await source();
   assert.equal(await page.locator('body').textContent().then((text) => /ans\.app|Runs in your browser|Python 3\.14|stays in this tab/.test(text)), false);
@@ -51,6 +57,10 @@ try {
   await run('naam = input("Jouw naam? ")\nprint("Hello", naam)');
   await state('waiting-for-input');
   assert.equal(await page.locator('#answer').evaluate((input) => input === document.activeElement), true);
+  assert.equal(await page.locator('#submit').count(), 0);
+  assert.equal(await page.getByRole('textbox', { name: 'Program input', exact: true }).count(), 1);
+  assert.equal(await page.locator('#answer').evaluate((input) => { const css = getComputedStyle(input); return css.borderTopWidth === '0px' && css.borderBottomWidth === '0px' && css.outlineStyle === 'none' && css.backgroundColor === 'rgba(0, 0, 0, 0)'; }), true);
+  assert.notEqual(await page.locator('.console-body').evaluate((body) => getComputedStyle(body).borderColor), 'rgba(0, 0, 0, 0)');
   await page.locator('#answer').fill('Misja'); await page.keyboard.press('Enter'); await state('ready');
   assert.equal(await page.locator('#output').textContent(), 'Jouw naam? Misja\nHello Misja\n');
   // A second submission after acceptance cannot echo or deliver the line twice.
@@ -139,8 +149,10 @@ try {
     for (const mode of ['system', 'light', 'dark']) {
       await theme(mode);
       if (mode !== 'system') assert.equal(await page.locator('html').getAttribute('data-theme'), mode);
-      assert.equal(await page.locator(`[data-theme-choice="${mode}"]`).getAttribute('aria-pressed'), 'true');
-      assert.equal(await page.locator('[data-theme-choice][aria-pressed="true"]').count(), 1);
+      assert.equal(await page.locator('#theme').getAttribute('data-theme-choice'), mode);
+      assert.equal(await page.locator('[data-theme-choice]').count(), 1);
+      assert.match(await page.locator('#theme').getAttribute('aria-label'), new RegExp(mode, 'i'));
+      assert.equal(await page.locator('#theme svg:visible').count(), 1);
     }
     for (const id of ['run', 'stop', 'console-title']) await page.locator(`#${id}`).scrollIntoViewIfNeeded();
   }
@@ -152,6 +164,9 @@ try {
     await page.setViewportSize({ width, height }); await page.evaluate(() => window.scrollTo(0, 0));
     const runBox = await page.locator('#run').boundingBox();
     const editorBox = await page.locator('#editor').boundingBox();
+    const payoff = await page.getByText('One file. One idea at a time.', { exact: true }).boundingBox();
+    const workspace = await page.locator('.workspace').boundingBox();
+    assert.ok(payoff.y >= editorBox.y + editorBox.height && payoff.y >= workspace.y + workspace.height, 'payoff below workspace');
     assert.ok(runBox.y >= 0 && runBox.y + runBox.height < height && runBox.y < editorBox.y, 'Run above editor and visible');
     for (const mode of ['light', 'dark']) {
       await theme(mode);
@@ -175,8 +190,11 @@ try {
     assert.equal(await page.locator('.cm-scroller').evaluate((node) => node.scrollHeight > node.clientHeight), true);
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
   }
-  await page.locator('[data-theme-choice="light"]').focus(); await page.keyboard.press('Enter');
-  assert.equal(await page.locator('[data-theme-choice="light"]').getAttribute('aria-pressed'), 'true');
+  await theme('system'); await page.locator('#theme').focus(); await page.keyboard.press('Enter');
+  assert.equal(await page.locator('#theme').getAttribute('data-theme-choice'), 'light');
+  await page.keyboard.press('Space'); assert.equal(await page.locator('#theme').getAttribute('data-theme-choice'), 'dark');
+  await page.keyboard.press('Space'); assert.equal(await page.locator('#theme').getAttribute('data-theme-choice'), 'system');
+  await theme('light');
   await page.emulateMedia({ colorScheme: 'dark' }); assert.equal(await page.locator('html').getAttribute('data-theme'), 'light');
   passed.push('upper controls, console-local focus and long content at 1280x720/360x640 in both themes; keyboard theme override');
   const storagePage = await context.newPage();
