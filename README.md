@@ -6,7 +6,8 @@ A little room for Python. One file. One idea at a time.
 
 Write and run a Python program in `main.py`, inspect its output and answer
 `input()` prompts directly in the console while it runs. The editor provides syntax highlighting and
-automatic indentation, with no code completion or AI assistance. Stop a running
+automatic indentation, plus bracket/quote closing and bracket matching, with no code suggestions
+or AI assistance. Stop a running
 program, correct an error and try again. Choose a light, dark or system theme.
 
 Klode is a small, general online Python editor. Use it to explore an idea,

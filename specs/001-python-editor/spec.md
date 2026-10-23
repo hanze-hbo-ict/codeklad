@@ -145,8 +145,14 @@ Agreed error handling:
   storage-failure copy. Preserve current edits through Run/errors/Stop/theme changes.
 - **FR-011**: Use the selected runtime's supported standard library, without extra
   packages, user file workflows or graphics. Document runtime compatibility limits.
-- **FR-012**: Provide syntax highlighting and automatic indentation, without code
-  completion. No AI assistance is allowed.
+- **FR-012**: Provide syntax highlighting and automatic indentation. Automatically
+  close `()`, `[]`, `{}` and Python single/double quotes in code, place the caret
+  inside, skip an existing auto-inserted closer when typed and delete an empty pair with Backspace. Avoid
+  unwanted pairing in comments/string text. Retain Python-aware prefix/triple-quote
+  handling; skip an auto-inserted closing quote and delete empty quote pairs.
+  Highlight matching and mismatching brackets legibly in light/dark themes. Preserve undo/redo, exact copying and browser Tab
+  navigation. Mechanical bracket assistance is allowed; code suggestions, snippets,
+  AI assistance remain excluded (#29).
 
 - **FR-013**: Put one state-dependent Run code/Stop/Retry button in a stable
   upper editor-header position and width, with native keyboard operation. Run code
@@ -282,3 +288,13 @@ during that brief delay; console status already indicates Running. Retain Stop
 through input/resumption. Retry is for failed runtime availability; ordinary Python
 errors remain console errors followed by Run code. This removes idle reset from
 the main action without adding a Reset control or changing worker/cache semantics.
+
+## Bracket assistance acceptance — 2026-10-23 (#29)
+
+Verify real typing of each bracket pair, caret placement, skipping an automatic
+closer, deleting an empty pair, nested pairs and undo/redo with exact native copy.
+Check single/double quotes close, skip and delete as pairs, including Python
+prefixes/triple quotes. Representative comments/string text and apostrophes inside
+strings must not gain unwanted closing characters. Matching and mismatch indications remain visible
+in both themes without obscuring text/selection. Tab still navigates focus and
+Control+Space does not open completion suggestions.
