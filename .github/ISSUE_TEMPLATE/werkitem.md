@@ -1,27 +1,27 @@
 ---
-name: Werkitem
-about: Afgebakend werk op basis van een specificatie
+name: Work item
+about: Bounded work based on a specification
 title: ''
 ---
 
-## Doel en specverwijzingen
+## Goal and specification references
 
-Noem specificatie, versie/commit en relevante eisen.
+Name the specification, version/commit and relevant requirements.
 
 ## Scope
 
-Beschrijf toegestane wijzigingen en wat buiten deze taak valt.
+Describe allowed changes and what is outside this task.
 
-## Acceptatiecriteria
+## Acceptance criteria
 
-Beschrijf observeerbaar gedrag en benodigde verificatie.
+Describe observable behaviour and the verification required.
 
-## Afhankelijkheden en open besluiten
+## Dependencies and open decisions
 
-## Uitvoering en overdracht
+## Execution and handoff
 
-Noem rollen, invoer, verwachte oplevering en stopvoorwaarden.
+Name roles, inputs, expected deliverables and stop conditions.
 
-## Bevindingen en besluiten
+## Findings and decisions
 
-Leg terugkoppeling vast in reacties. Verwerk productbesluiten ook in de spec.
+Record feedback in comments. Record product decisions in the specification as well.

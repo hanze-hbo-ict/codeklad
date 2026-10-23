@@ -1,13 +1,13 @@
-# Ontwikkelomgeving
+# Development environment
 
-Gebruik Python 3.11 of nieuwer en `uv`. `pyproject.toml` beheert de
-ontwikkeltooling; Klode heeft voorlopig geen Python-applicatiepakket.
-De editor draait als JavaScript/Pyodide-applicatie in de browser.
+Use Python 3.11 or newer and `uv`. `pyproject.toml` manages development tooling;
+Klode currently has no Python application package. The editor runs as a
+JavaScript/Pyodide application in the browser.
 
-Spec Kit staat vast op `specify-cli==1.2.2`. Het lockbestand legt de
-transitieve dependencies vast.
+Spec Kit is pinned to `specify-cli==1.2.2`. The lockfile records transitive
+dependencies.
 
-## Installeren en controleren
+## Installation and checks
 
 ```bash
 uv sync --locked
@@ -15,69 +15,69 @@ uv run --locked specify version
 uv run --locked specify check
 ```
 
-Installeer geen globale kopie van de CLI voor dit project. Als de standaard
-uv-cache niet schrijfbaar is in een sandbox, gebruik dan een lokale cache:
+Do not install a global copy of the CLI for this project. If the default uv cache
+is not writable in a sandbox, use a local cache:
 
 ```bash
 uv --cache-dir .uv-cache run --locked --offline specify version
 ```
 
-Die offline route vereist een geïnstalleerde omgeving of gevulde cache.
+The offline route requires an installed environment or a populated cache.
 
-## Spec Kit gebruiken
+## Using Spec Kit
 
-De integratie is met de gebundelde templates van versie 1.2.2 gegenereerd:
+The integration was generated with the bundled templates from version 1.2.2:
 
 ```bash
 uv run --locked specify init /tmp/codeklad-speckit-stage \
   --integration codex --script sh --non-interactive
 ```
 
-De mappen `.specify` en `.agents` zijn daarna overgenomen naar Klode,
-zonder bestaande projectbestanden te overschrijven. Het constitution-template
-is ingevuld met de eerder bevestigde projectafspraken. Init-metadata en
-manifests bewaren de herkomst van gegenereerde bestanden. De stagingdirectory
-was alleen voor de bootstrap; gebruik voor volgende generatie een lege directory.
+The `.specify` and `.agents` directories were then copied into Klode without
+overwriting existing project files. The constitution template was filled with
+the previously confirmed project agreements. Init metadata and manifests preserve
+the provenance of generated files. The staging directory was only for bootstrap;
+use an empty directory for subsequent generation.
 
-Start Codex vanuit Klode om de projectskills in `.agents/skills` te
-ontdekken. Relevante opdrachten in het agentgesprek zijn:
+Start Codex from Klode to discover the project skills in `.agents/skills`.
+Relevant commands in the agent conversation are:
 
-- `$speckit-constitution`: projectprincipes onderhouden.
-- `$speckit-specify`: een featurespecificatie opstellen.
-- `$speckit-clarify`: open vragen verduidelijken.
-- `$speckit-plan`: een technisch plan opstellen.
-- `$speckit-tasks`: een plan in taken ontleden.
-- `$speckit-analyze`: consistentie tussen artefacten beoordelen.
-- `$speckit-implement`: een toegewezen implementatie uitvoeren.
-- `$speckit-converge`: resterend werk vaststellen.
+- `$speckit-constitution`: maintain the project principles.
+- `$speckit-specify`: draft a feature specification.
+- `$speckit-clarify`: clarify open questions.
+- `$speckit-plan`: create a technical plan.
+- `$speckit-tasks`: break a plan into tasks.
+- `$speckit-analyze`: assess consistency between artifacts.
+- `$speckit-implement`: execute an assigned implementation.
+- `$speckit-converge`: identify remaining work.
 
-Skills kunnen in een lopende agentsessie pas na herstart zichtbaar worden.
-CLI-commands zijn terminalopdrachten; bovenstaande skills zijn dat niet.
+Skills may become visible in an ongoing agent session only after a restart.
+CLI commands are terminal commands; the skills above are not.
 
-## Aansluiting op onze werkwijze
+## Alignment with our workflow
 
-Lees `AGENTS.md`, `docs/werkwijze.md` en de projectprincipes vóór gebruik.
-`specs/product.md` blijft het productoverzicht. Spec Kit plaatst features
-normaal onder `specs/<nummer>-<naam>/`. The current editor specification is
+Read `AGENTS.md`, `docs/werkwijze.md` and the project principles before use.
+`specs/product.md` remains the product overview. Spec Kit normally places features
+under `specs/<number>-<name>/`. The current editor specification is
 `specs/001-python-editor/spec.md`; unresolved product questions remain explicit.
 
-GitHub-issues blijven leidend voor werkstatus en overdrachten. Een `tasks.md`
-is een decompositie bij de spec; koppel taken aan werkitems zodra GitHub
-beschikbaar is. Implementeer alleen binnen de toegewezen rol en scope.
-De gebundelde workflow `speckit` implementeert niet onze rollenlus, onafhankelijke
-beoordeling of menselijke mergegate. Gebruik die niet als vervanging daarvan.
+GitHub issues remain authoritative for work status and handoffs. A `tasks.md`
+decomposes work under the specification; link tasks to work items once GitHub is
+available. Implement only within the assigned role and scope. The bundled
+`speckit` workflow does not implement our role loop, independent review or human
+merge gate. Do not use it as a replacement for those agreements.
 
-Bij upgrades: wijzig de dependency en het lockbestand bewust, genereer in een
-lege tijdelijke directory en beoordeel verschillen vóór overname. Behoud eigen
-projectprincipes en procesafspraken.
+For upgrades, deliberately change the dependency and lockfile, generate in an
+empty temporary directory and review differences before adoption. Preserve the
+project's own principles and process agreements.
 
-## Huidige status
+## Current status
 
-CLI 1.2.2, Codex-skills, templates en Bash-scripts zijn lokaal beschikbaar.
-De bootstrap is via PR #5 gemerged. De workflow `Tooling` controleert de
-ontwikkelomgeving en meegeleverde Spec Kit-bestanden. Zie
-[branchbescherming en controles](branchbescherming.md) voor de inrichting en
-beperkingen van de mergegate.
+CLI 1.2.2, Codex skills, templates and Bash scripts are available locally.
+Bootstrap was merged through PR #5. The `Tooling` workflow checks the development
+environment and bundled Spec Kit files. See
+[branch protection and checks](branchbescherming.md) for the configuration and
+limitations of the merge gate.
 
 The public editor is live at https://klode.app/. See
 [hosting and release verification](hosting.md) for Netlify configuration and

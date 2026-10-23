@@ -1,61 +1,64 @@
-# Klode — projectprincipes
+# Klode — project principles
 
-## I. Eenvoud en toetsgebruik
+## I. Simplicity and exam use
 
-Klode biedt een minimale programmeeromgeving zonder AI-assistentie.
-De eerste versie ondersteunt Python in één bestand, `main.py`, met een editor
-en uitvoer/invoer. Andere talen vallen buiten deze eerste versie.
+Klode provides a minimal programming environment without AI assistance.
+The first version supports Python in one file, `main.py`, with an editor and
+input/output. Other languages are outside this first version.
 
-## II. Bruikbaarheid
+## II. Usability
 
-De interface is responsief, ook op kleinere schermen. Het thema volgt het
-systeem en kan handmatig tussen licht en donker worden gewisseld.
+The interface is responsive, including on smaller screens. The theme follows
+the system and can be switched manually between light and dark.
 
-## III. Onderhoudbaarheid
+## III. Maintainability
 
-Gebruik bij voorkeur modern JavaScript en een eenvoudige bouwstraat.
-Frameworks en bibliotheken moeten waarde toevoegen. Gebruik beproefde
-bibliotheken waar passend, bijvoorbeeld voor de editor. Python en uv beheren
-voorlopig de ontwikkeltooling; dit verplicht de browserapp niet tot een backend.
+Prefer modern JavaScript and a simple build process. Frameworks and libraries
+must add value. Use proven libraries where appropriate, for example for the
+editor. Python and uv currently manage development tooling; this does not require
+the browser application to have a backend.
 
-## IV. Specificatie als afspraak
+## IV. Specification as agreement
 
-Leg gewenst gedrag, afbakening en observeerbare acceptatiecriteria vast vóór
-implementatie. Houd de specificatie na wijzigingen actueel. Markeer open vragen
-expliciet; een technisch voorstel is geen genomen productbesluit.
-`specs/product.md` bevat de huidige uitgangspunten en open productvragen.
+Record desired behaviour, scope and observable acceptance criteria before
+implementation. Keep the specification current after changes. Mark open questions
+explicitly; a technical proposal is not a product decision.
+`specs/product.md` contains the current starting points and open product questions.
 
-## V. Menselijke product owner en onafhankelijke rollen
+## V. Human product owner and independent roles
 
-De product owner is een mens. De orchestrator verduidelijkt wensen, stelt
-GitHub-werkitems op en coördineert geïsoleerde taken. Ontwikkelaar,
-tester/reviewer en release manager hebben afgebakende verantwoordelijkheden.
-Een beoordelaar beoordeelt geen eigen implementatie. Volg `docs/werkwijze.md`
-voor de route, overdrachten, blockers en escalatie.
+The product owner is a human. The orchestrator clarifies wishes, creates GitHub
+work items and coordinates isolated tasks. Developer, tester/reviewer and release
+manager have bounded responsibilities. A reviewer does not assess their own
+implementation. Follow `docs/werkwijze.md` for the workflow, handoffs, blockers
+and escalation.
 
-## Werkitems en verificatie
+## Work items and verification
 
-GitHub-issues vertegenwoordigen werkitems en verwijzen naar de specversie,
-scope, acceptatiecriteria en afhankelijkheden. Spec Kit-taken zijn een
-decompositie bij de spec; issues zijn leidend voor werkstatus en overdrachten.
-Rapporteer controles met concrete resultaten en de beoordeelde commit.
-Onderscheid lokale verificatie van verificatie in de echte toetsomgeving.
+GitHub issues represent work items and refer to the specification version, scope,
+acceptance criteria and dependencies. Spec Kit tasks decompose work under the
+specification; issues are authoritative for work status and handoffs.
+Report checks with concrete results and the reviewed commit. Distinguish local
+verification from verification in the actual exam environment.
 
-## Governance en publicatie
+## Governance and publication
 
-De product owner beslist over scope, gewenst gedrag en merge. Herstel binnen
-de afgesproken scope kan terug naar een voorgaande rol; productkeuzes en
-scopewijzigingen vereisen een menselijk besluit. Leg rationale bij het issue
-vast en werk gewijzigde productafspraken ook in de spec bij.
+The product owner decides scope, desired behaviour and merge. Fixes within the
+agreed scope may go back to a preceding role; product choices and scope changes
+require a human decision. Record rationale on the issue and update changed
+product agreements in the specification as well.
 
-Menselijke mergegoedkeuring autoriseert publicatie van de goedgekeurde versie.
-Falende releasecontroles stoppen publicatie en leiden tot terugkoppeling.
-Spec Kit-commands en workflows vervangen deze bevoegdheden en gates niet.
-Wijzigingen aan deze principes vereisen een expliciet product-ownerbesluit.
+Human merge approval authorises publication of the approved version. Failing
+release checks stop publication and lead to a report back. Spec Kit commands
+and workflows do not replace these authorities and gates. Changes to these
+principles require an explicit product-owner decision.
 
 **Version**: 1.0.1 | **Ratified**: 2026-10-21 | **Last Amended**: 2026-10-22
 
-Bron: door de product owner in het bootstrapgesprek bevestigde afspraken.
+Source: agreements confirmed by the product owner in the bootstrap conversation.
 
 Amendment 1.0.1 records the product-owner-approved name Klode (2026-10-22).
 The principles and governance are unchanged; see issue #10.
+
+English translation under issue #8 (2026-10-23) preserves version 1.0.1 and its
+ratification/amendment dates; it introduces no change to the principles.
