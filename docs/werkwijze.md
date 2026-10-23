@@ -9,7 +9,7 @@ conversation between the product owner and assistant remains Dutch.
 
 Apply this agreement to new work immediately. Existing Dutch artifacts and
 templates will be corrected separately under
-[issue #8](https://github.com/hanze-hbo-ict/codeklad/issues/8). Preserve decisions,
+[issue #8](https://github.com/hanze-hbo-ict/klode/issues/8). Preserve decisions,
 requirements, acceptance criteria and unresolved questions when translating.
 Historical comments and closed work items may remain in their original language.
 The application's user-interface language is a separate product decision.
