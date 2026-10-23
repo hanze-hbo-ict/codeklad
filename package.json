@@ -15,9 +15,10 @@
     "build": "npm run vendor:runtime && vite build",
     "preview": "vite preview --host 127.0.0.1",
     "test": "node --test tests/unit/*.test.mjs",
-    "test:browser": "node tests/browser/app.browser.test.mjs"
+    "test:browser": "node tests/browser/app.browser.test.mjs && node tests/browser/brackets.browser.test.mjs"
   },
   "dependencies": {
+    "@codemirror/autocomplete": "6.20.4",
     "@codemirror/commands": "6.11.1",
     "@codemirror/lang-python": "6.2.1",
     "@codemirror/language": "6.13.1",

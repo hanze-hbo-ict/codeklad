@@ -30,7 +30,11 @@ workflow or an ans.app integration.
   through execution, errors, Stop and theme changes.
 - First-version Python scope is the runtime-supported standard library, without
   extra packages, user file workflows or graphics.
-- Provide syntax highlighting and automatic indentation, without code completion.
+- Provide syntax highlighting, automatic indentation, automatic closing of `()`,
+  `[]`, `{}` and matching/mismatching bracket highlighting. Mechanical bracket
+  assistance is allowed; word/function completion, snippets and AI remain excluded.
+  Single/double Python quotes also close automatically, using Python-aware
+  prefix/triple-quote handling.
 - SQL and other languages are future wishes, outside the first version.
 
 ## Proposed technical direction
@@ -95,3 +99,13 @@ position, with an initial 300 ms Stop appearance delay for short executions and
 immediate Stop on input wait. Actual Stop is immediate; there is no execution
 timeout or idle reset control. Loading/Stopping disable the button; ordinary
 Python errors return to Run code rather than Retry.
+
+## Bracket assistance decision — 2026-10-23 (#29)
+
+The product owner approved automatic bracket closing and matching. Typing a closer
+before an auto-inserted closer skips it; Backspace removes an empty pair. Avoid
+unwanted pairing in Python comments/string text. The product owner subsequently
+approved quote closing in the same item: retain native Python-aware single/double,
+prefix and triple-quote handling, closer skipping and empty-pair deletion. Keep matching and mismatch
+indications readable in both themes, normal browser Tab navigation, exact copying
+and undo/redo. The footer remains “No code completion or AI assistance”.
