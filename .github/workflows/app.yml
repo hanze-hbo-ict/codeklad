@@ -34,5 +34,5 @@ jobs:
           test -n "$chrome_path"
           echo "CHROME_BIN=$chrome_path" >> "$GITHUB_ENV"
           "$chrome_path" --version
-      - name: Application and spike browser regressions
+      - name: Application browser regressions
         run: npm run test:browser

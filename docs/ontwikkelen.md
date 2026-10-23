@@ -2,7 +2,7 @@
 
 Gebruik Python 3.11 of nieuwer en `uv`. `pyproject.toml` beheert de
 ontwikkeltooling; Klode heeft voorlopig geen Python-applicatiepakket.
-De geplande editor draait als JavaScript/Pyodide-applicatie in de browser.
+De editor draait als JavaScript/Pyodide-applicatie in de browser.
 
 Spec Kit staat vast op `specify-cli==1.2.2`. Het lockbestand legt de
 transitieve dependencies vast.
@@ -58,8 +58,8 @@ CLI-commands zijn terminalopdrachten; bovenstaande skills zijn dat niet.
 
 Lees `AGENTS.md`, `docs/werkwijze.md` en de projectprincipes vóór gebruik.
 `specs/product.md` blijft het productoverzicht. Spec Kit plaatst features
-normaal onder `specs/<nummer>-<naam>/`. Er is nog geen featurespecificatie
-gegenereerd of open productvraag stilzwijgend ingevuld.
+normaal onder `specs/<nummer>-<naam>/`. The current editor specification is
+`specs/001-python-editor/spec.md`; unresolved product questions remain explicit.
 
 GitHub-issues blijven leidend voor werkstatus en overdrachten. Een `tasks.md`
 is een decompositie bij de spec; koppel taken aan werkitems zodra GitHub
@@ -79,7 +79,7 @@ ontwikkelomgeving en meegeleverde Spec Kit-bestanden. Zie
 [branchbescherming en controles](branchbescherming.md) voor de inrichting en
 beperkingen van de mergegate.
 
-The public editor is live at https://klode.netlify.app/. See
+The public editor is live at https://klode.app/. See
 [hosting and release verification](hosting.md) for Netlify configuration and
 remaining operational/school-environment checks, and [CONTRIBUTING](../CONTRIBUTING.md)
 for the contributor workflow.

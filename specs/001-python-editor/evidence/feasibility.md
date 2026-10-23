@@ -1,5 +1,10 @@
 # Input feasibility evidence — issue #13
 
+Historical evidence for the commits recorded below. Issue #28 retires the separate
+spike application and moves current regressions to `tests/`; use Git history for
+the original spike source and README. This record is not current product status.
+
+
 Baseline: approved specification commit `9112431`, constitution 1.0.1;
 implementation base `3e53c7d`, branch `013-input-feasibility`.
 Implementation commit: see the reviewed head SHA recorded in the PR and issue #13 handoff.

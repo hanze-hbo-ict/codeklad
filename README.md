@@ -2,7 +2,7 @@
 
 A little room for Python. One file. One idea at a time.
 
-**[Open Klode →](https://klode.netlify.app/)**
+**[Open Klode →](https://klode.app/)**
 
 Write and run a Python program in `main.py`, inspect its output and answer
 `input()` prompts directly in the console while it runs. The editor provides syntax highlighting and

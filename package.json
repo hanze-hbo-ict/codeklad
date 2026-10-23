@@ -14,9 +14,8 @@
     "dev": "vite --host 127.0.0.1",
     "build": "npm run vendor:runtime && vite build",
     "preview": "vite preview --host 127.0.0.1",
-    "test": "node --test experiments/input-spike/execution.test.mjs experiments/input-spike/mailbox.test.mjs experiments/input-spike/preview-ready.test.mjs",
-    "test:browser": "node experiments/input-spike/app.browser.test.mjs && npm run test:browser:spike",
-    "test:browser:spike": "node experiments/input-spike/browser.test.mjs"
+    "test": "node --test tests/unit/*.test.mjs",
+    "test:browser": "node tests/browser/app.browser.test.mjs"
   },
   "dependencies": {
     "@codemirror/commands": "6.11.1",

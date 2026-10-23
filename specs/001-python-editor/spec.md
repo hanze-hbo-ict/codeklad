@@ -2,9 +2,11 @@
 
 **Feature Branch**: `001-python-editor`
 **Created**: 2026-10-21
-**Updated**: 2026-10-22
+**Updated**: 2026-10-23
 **Status**: Approved scope revised by feedback round 1 (#19–#24); public deployment
-exists, revised implementation pending. Actual school acceptance remains pending.
+includes the revised implementation merged in PR #25. Actual school acceptance
+remains pending. Cleanup #28 retires the separate spike application without
+changing editor behaviour or acceptance requirements.
 **Input**: Product-owner discussion, issue #3, `specs/product.md`, constitution
 v1.0.1; merged product-name base `bb356fc`.
 

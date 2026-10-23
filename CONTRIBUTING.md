@@ -57,7 +57,9 @@ npm run test:browser
 Choose checks relevant to the change and include their results in the PR. Browser
 tests use pinned `playwright-core` and an installed Chrome/Edge executable; set
 `CHROME_BIN=/path/to/browser` when it is not `/opt/google/chrome/chrome`. They start
-local preview servers on ports 4273–4276 and do not download a browser.
+local preview servers on ports 4275–4276 and do not download a browser.
+Unit tests live in `tests/unit/`, browser regressions in `tests/browser/`, and
+shared test helpers in `tests/support/`. Build before running the browser suite.
 
 For specification tooling, use Python 3.11+ and uv:
 

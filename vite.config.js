@@ -6,5 +6,4 @@ const headers = {
 export default defineConfig({
   server: { headers, strictPort: true },
   preview: { headers, strictPort: true },
-  build: { rolldownOptions: { input: ['index.html', 'experiments/input-spike/index.html'] } },
 });
