@@ -1,4 +1,4 @@
-# Werkwijze
+# Workflow
 
 ## Working language
 
@@ -23,58 +23,58 @@ second person is not required. Independent agent review remains part of the
 workflow. An agent may execute a merge on explicit human instruction, and must
 not merge autonomously. This clarification was confirmed on 2026-10-22 (#2).
 
-## Verantwoordelijkheden
+## Responsibilities
 
-De product owner is een mens: Misja of een collega. De orchestrator helpt wensen
-verduidelijken, stelt werkitems op en bewaakt voortgang, afhankelijkheden en
-overdrachten. De ontwikkelaar implementeert een afgebakende taak. De onafhankelijke
-tester/reviewer beoordeelt het resultaat tegen de spec. De release manager
-controleert opleverbaarheid, publiceert na de menselijke gate en verifieert de
-deployment. De concrete tooling voor deze rollen moet nog worden ingericht.
+The product owner is a human: Misja or a colleague. The orchestrator helps clarify
+wishes, creates work items and tracks progress, dependencies and handoffs. The
+developer implements a bounded task. The independent tester/reviewer assesses
+the result against the specification. The release manager checks readiness,
+publishes after the human gate and verifies the deployment. Concrete tooling for
+these roles still needs to be established.
 
-## Route
+## Workflow
 
-1. Product owner en orchestrator leggen gewenst gedrag en afbakening vast.
-2. De orchestrator maakt een GitHub-issue met specverwijzingen, scope,
-   acceptatiecriteria, afhankelijkheden en verwachte oplevering.
-3. De ontwikkelaar werkt in een eigen branch/worktree en levert een PR met
-   relevante controles en een verwijzing naar het issue.
-4. Een onafhankelijke tester/reviewer rapporteert bevindingen en bewijs.
-5. De orchestrator stuurt herstel binnen bestaande afspraken terug naar de
-   passende rol. Productkeuzes en scopewijzigingen gaan naar de product owner.
-6. De product owner beoordeelt de concrete PR en beslist over merge.
-7. Mergegoedkeuring autoriseert publicatie. De release manager controleert dat de
-   goedgekeurde versie wordt gepubliceerd en verifieert het resultaat. Bij falende
-   controles stopt publicatie en volgt terugkoppeling.
+1. The product owner and orchestrator record the desired behaviour and scope.
+2. The orchestrator creates a GitHub issue with specification references, scope,
+   acceptance criteria, dependencies and expected deliverables.
+3. The developer works in a separate branch/worktree and delivers a PR with
+   relevant checks and a link to the issue.
+4. An independent tester/reviewer reports findings and evidence.
+5. The orchestrator routes fixes within existing agreements back to the appropriate
+   role. Product choices and scope changes go to the product owner.
+6. The product owner reviews the concrete PR and decides merge.
+7. Merge approval authorises publication. The release manager checks that the
+   approved version is published and verifies the result. Failing checks stop
+   publication and lead to a report back.
 
-## Overdracht en isolatie
+## Handoffs and isolation
 
-Elke taak benoemt rol, issue, specversie/commit, invoer, toegestane wijzigingen,
-acceptatiecriteria, verwacht resultaat en stopvoorwaarden. Geef beoordelaars
-de spec, diff en controleerbare resultaten; laat hun oordeel niet afhangen van
-het maakgesprek. Parallel werk vereist expliciete afspraken over gedeelde
-interfaces en bestanden.
+Each task names the role, issue, specification version/commit, inputs, allowed
+changes, acceptance criteria, expected result and stop conditions. Give reviewers
+the specification, diff and verifiable results; their judgment must not depend on
+the implementation conversation. Parallel work requires explicit agreements about
+shared interfaces and files.
 
-Een overdracht noemt de beoordeelde commit, uitgevoerde controles, resultaten,
-resterende onzekerheden en de volgende verantwoordelijke rol. Een blocker bevat
-het probleem, bewijs, impact en zo mogelijk opties of een concrete beslisvraag.
-Herstelrondes zijn begrensd door de taak; bij herhaling zonder voortgang escaleert
-de orchestrator naar de product owner.
+A handoff names the reviewed commit, checks performed, results, remaining
+uncertainties and the next responsible role. A blocker includes the problem,
+evidence, impact and, where possible, options or a concrete decision question.
+Fix rounds are bounded by the task; repeated lack of progress is escalated to
+the product owner.
 
-## Bronnen en onderhoud
+## Sources and maintenance
 
-Specs in Git beschrijven productgedrag. Issues volgen werk, rationale en besluiten.
-PR's bevatten wijzigingen en verificatie. Verwerk besluiten die productgedrag
-veranderen ook in de spec. Een wezenlijke scopewijziging vereist een menselijk
-besluit voordat afhankelijke uitvoering doorgaat.
+Specifications in Git describe product behaviour. Issues track work, rationale
+and decisions. PRs contain changes and verification. Record decisions that change
+product behaviour in the specification as well. A substantial scope change
+requires a human decision before dependent implementation continues.
 
-Een PR voor de human gate noemt het probleem, het resultaat, aangetoonde
-acceptatiecriteria, beperkingen en waar passend een preview. Scheid succesvolle
-lokale controles van controles in de echte toetsomgeving.
+A PR for the human gate describes the problem, result, demonstrated acceptance
+criteria, limitations and a preview where appropriate. Distinguish successful
+local checks from checks in the actual exam environment.
 
-Spec Kit 1.2.2 is lokaal ingericht met de Codex-integratie. De projectprincipes
-staan in `.specify/memory/constitution.md`. Takenbestanden dienen als decompositie
-bij de spec; GitHub-issues zijn leidend voor werkstatus en overdrachten.
-De gebundelde workflow implementeert niet onze rollenlus: de orchestrator bewaakt
-onze rolgrenzen en menselijke gate. Deze afspraken gelden ook wanneer een
-Spec Kit-command anders suggereert.
+Spec Kit 1.2.2 is installed locally with the Codex integration. The project
+principles are in `.specify/memory/constitution.md`. Task files decompose work
+under the specification; GitHub issues are authoritative for work status and
+handoffs. The bundled workflow does not implement our role loop: the orchestrator
+guards role boundaries and the human gate. These agreements also apply when a
+Spec Kit command suggests otherwise.

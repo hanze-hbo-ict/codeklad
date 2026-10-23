@@ -1,15 +1,15 @@
-## Probleem en resultaat
+## Problem and result
 
-## Werkitem en specificatie
+## Work item and specification
 
-## Verificatie
+## Verification
 
-Noem acceptatiecriteria, controles, resultaten en beoordeelde commit.
+Name acceptance criteria, checks, results and the reviewed commit.
 
-## Onafhankelijke beoordeling
+## Independent review
 
-## Preview en resterende beperkingen
+## Preview and remaining limitations
 
-## Publicatie
+## Publication
 
-Merge vereist menselijke goedkeuring en autoriseert publicatie van deze versie.
+Merge requires human approval and authorises publication of this version.

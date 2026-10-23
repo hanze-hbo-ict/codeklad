@@ -1,7 +1,7 @@
 [project]
 name = "klode"
 version = "0.1.0"
-description = "Minimale online programmeeromgeving voor onderwijs en toetsen"
+description = "Minimal online programming environment for education and exams"
 readme = "README.md"
 license = "MIT"
 license-files = ["LICENSE", "THIRD_PARTY_NOTICES.md"]
