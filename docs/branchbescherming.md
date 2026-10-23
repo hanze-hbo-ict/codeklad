@@ -1,6 +1,6 @@
 # Branch protection and checks
 
-Work item: [#2](https://github.com/hanze-hbo-ict/codeklad/issues/2).
+Work item: [#2](https://github.com/hanze-hbo-ict/klode/issues/2).
 GitHub settings are authoritative for the current protection of this public repository.
 
 ## Required tooling check
