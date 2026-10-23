@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { Worker } from 'node:worker_threads';
-import { CAPACITY, HEADER_BYTES, views, submit, STATE, RUN, REQUEST, LENGTH, WAITING, ANSWER, stdinLine } from './mailbox.js';
+import { CAPACITY, HEADER_BYTES, views, submit, STATE, RUN, REQUEST, LENGTH, WAITING, ANSWER, stdinLine } from '../../src/runtime/input-mailbox.js';
 function pending() {
   const buffer = new SharedArrayBuffer(HEADER_BYTES + CAPACITY);
   const { control } = views(buffer);

@@ -1,7 +1,7 @@
 # Netlify hosting and verification
 
 The product owner selected Netlify on 2026-10-22 and the public editor is live at
-https://klode.netlify.app/. Configuration is tracked in `netlify.toml` under
+https://klode.app/. Configuration is tracked in `netlify.toml` under
 issue #17 (parent #4). Record exact deployment metadata and account settings
 separately; the public URL alone does not establish every operational setting.
 
@@ -28,8 +28,8 @@ uploaded or imported for the public site.
 ## Static hosting contract
 
 Serve the entire static `dist/` output on the approved editor origin over HTTPS.
-Preserve `/experiments/input-spike/index.html`, `/assets/` and `/runtime/` paths;
-the spike currently assumes hosting at the origin root. Serve `.wasm` with
+Preserve `/assets/` and `/runtime/` paths; the editor is hosted at the origin
+root. The retired input spike is not a production build entry. Serve `.wasm` with
 `Content-Type: application/wasm`, `.mjs` as JavaScript, and zip as binary data.
 Set these response headers on HTML and worker/script responses:
 
@@ -48,7 +48,7 @@ All startup resources are bundled on the same editor origin. `npm ci` downloads
 locked build dependencies; `npm run vendor:runtime` only verifies/copies local
 npm files and refuses checksum drift. `npm run build` includes runtime files in
 the static output. There are no CDN imports or import-triggered installation in
-the spike. A Python import absent from the bundled runtime fails normally.
+the application. A Python import absent from the bundled runtime fails normally.
 This is not a security sandbox: arbitrary Python/JavaScript interoperation is not
 restricted, and the exam network whitelist remains an environmental requirement.
 
@@ -62,7 +62,7 @@ The product owner authorised local editor implementation after reporting the
 HTTPS spike works in a Windows/Edge VM. Actual school-environment evidence and
 independent review remain mandatory before exam-use release; see the dated
 continuation decision in the feature specification. The product editor is at
-`/`; retain the isolated spike path for technical validation.
+`/`; application browser regressions now cover the former spike cases.
 
 ## Release verification
 
@@ -78,7 +78,7 @@ input/loop/output flood, rerun, and exact native source copying. For feedback-ro
 releases, verify reload starts the normal initial source without application-managed
 source recovery, including when an old storage value exists. Current source must
 survive Run/errors/Stop/theme changes. Historical recovery checks describe only
-their original commits. Observe all five runtime requests on the Netlify origin;
+their original commits. Observe all five runtime requests on the editor origin;
 there must be no runtime CDN or package-install request. Native copy into ans.app
 and the actual Windows/Edge school whitelist remain separate acceptance evidence
 in #13, not implied by successful Netlify smoke tests.

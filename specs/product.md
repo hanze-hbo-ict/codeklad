@@ -1,7 +1,7 @@
 # Product specification — draft
 
 Status: agreed product scope, including feedback round 1 (#19–#24).
-Public deployment: https://klode.netlify.app/. Actual school-environment acceptance remains pending.
+Public deployment: https://klode.app/. Actual school-environment acceptance remains pending.
 Product name: **Klode**, selected by the product owner on 2026-10-22 (formerly Codeklad).
 
 ## Goal
@@ -37,7 +37,7 @@ workflow or an ans.app integration.
 
 Pyodide in a Web Worker, an established editor library and all required assets
 served from an allowed origin. The product owner selected Netlify on 2026-10-22;
-the public URL is https://klode.netlify.app/. Feasibility must be demonstrated on an actual exam
+the public URL is https://klode.app/. Feasibility must be demonstrated on an actual exam
 laptop with the whitelist in effect, including a cold load without cached assets.
 A URL whitelist is restricted connectivity, not a requirement for fully offline use.
 

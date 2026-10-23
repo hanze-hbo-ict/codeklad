@@ -1,5 +1,10 @@
 # Local editor implementation evidence — issue #15
 
+Historical evidence for the commits recorded below. Issue #28 retires the separate
+spike application and moves current regressions to `tests/`; use Git history for
+the original spike source and README. This record is not current product status.
+
+
 Baseline: specification/continuation decision `a086775`, constitution 1.0.1;
 merged local spike `e1c39e1`. Reviewed implementation head: see the PR and issue
 handoff. This report is local validation, not completed exam acceptance.

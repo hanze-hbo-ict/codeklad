@@ -6,11 +6,12 @@ recorded separately. Existing tooling checks also run via uv.
 ## Local setup
 
 Use Node 24.19.0/npm 11.16.0, then `npm ci`, `npm test`, `npm run dev` and
-`npm run build`. The editor opens at `/`; the input spike remains under
-`/experiments/input-spike/index.html`. The runtime-vendoring script is wired into the build and checks
+`npm run build`. The editor opens at `/`. The retired input spike is not built
+or served as a separate application. The runtime-vendoring script checks
 pinned assets. Run `npm run preview` with isolation headers configured for validation.
 Run `npm run test:browser` with installed Chrome/Edge (`CHROME_BIN` override)
-for application and spike regressions. The production host must return the same headers; a successful dev server alone
+for application regressions in `tests/browser/` (ports 4275–4276). Unit tests
+and shared helpers are in `tests/unit/` and `tests/support/`. The production host must return the same headers; a successful dev server alone
 is insufficient evidence. No automatic deployment is part of these commands.
 
 ## Feasibility evidence

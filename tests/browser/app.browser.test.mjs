@@ -3,7 +3,7 @@ import { spawn } from 'node:child_process';
 import { createServer } from 'node:http';
 import { readFile } from 'node:fs/promises';
 import { chromium } from 'playwright-core';
-import { waitForPreview } from './preview-ready.mjs';
+import { waitForPreview } from '../support/preview-ready.mjs';
 const port = 4275, origin = `http://127.0.0.1:${port}`;
 const preview = spawn(process.execPath, ['node_modules/vite/bin/vite.js', 'preview', '--host', '127.0.0.1', '--port', String(port)], { stdio: 'pipe' });
 let browser, negative;

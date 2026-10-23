@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { EventEmitter } from 'node:events';
 import { PassThrough } from 'node:stream';
 import { createServer } from 'node:http';
-import { waitForPreview } from './preview-ready.mjs';
+import { waitForPreview } from '../support/preview-ready.mjs';
 function child() { return Object.assign(new EventEmitter(), { stdout: new PassThrough(), stderr: new PassThrough(), exitCode: null, signalCode: null }); }
 async function server(status, run) {
   const http = createServer((request, response) => { response.writeHead(status); response.end('fixture'); });
