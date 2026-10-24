@@ -109,3 +109,9 @@ approved quote closing in the same item: retain native Python-aware single/doubl
 prefix and triple-quote handling, closer skipping and empty-pair deletion. Keep matching and mismatch
 indications readable in both themes, normal browser Tab navigation, exact copying
 and undo/redo. The footer remains “No code completion or AI assistance”.
+
+## Footer placement — 2026-10-23 (#34)
+
+Group the repository link and “No code completion or AI assistance” at the left
+of the footer. Allow natural wrapping on narrow screens and reserve space at the
+right so the hosting badge does not obscure either item. Keep text/link unchanged.

@@ -175,6 +175,8 @@ Agreed error handling:
   “No code completion or AI assistance” and both approved taglines; add a subtle
   labelled repository link to https://github.com/hanze-hbo-ict/klode. Keep “One file.
   One idea at a time.” below the editor/workspace as a payoff, not above the console.
+  Group the repository link and assistance text at the left of the footer, wrapping
+  on narrow screens and reserving room at the right for the hosting badge (#34).
 - **FR-017**: Provide a public README leading with the live URL and actual features,
   short local quickstart and limits. CONTRIBUTING links the established human/agent
   workflow and governance; do not claim unimplemented feedback is already live.
